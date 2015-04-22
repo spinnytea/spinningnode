@@ -4,14 +4,17 @@
 
     <link href="/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/template/spinningnode.css" rel="stylesheet">
-</head>
-<body ng-app="spinningnode">
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/angular/angular.js"></script>
+    <script src="/vendor/angular-route/angular-route.js"></script>
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/spinningnode.js"></script>
+</head>
+<body ng-app="spinningnode">
 
-    <h1>Hello World</h1>
+<div data-ng-view></div>
+
 </body>
 </html>
