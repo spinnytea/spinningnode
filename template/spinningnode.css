@@ -2,3 +2,12 @@
     display: inline;
     width: 100px;
 }
+
+table.maze {
+    margin-bottom: 15px;
+}
+table.maze td {
+    width: 20px;
+    height: 20px;
+    border: 0 solid darkslategray;
+}
