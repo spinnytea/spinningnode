@@ -1,0 +1,4 @@
+.form-horizontal > input.form-control[type="number"] {
+    display: inline;
+    width: 100px;
+}

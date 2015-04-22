@@ -6,6 +6,7 @@ require('angular').module('spinningnode', [
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when(
     '/mazes', {
+      controller: 'spinningnode.mazes.appController',
       templateUrl: 'template/maze/app.html'
     }
   ).otherwise({
