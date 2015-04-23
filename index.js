@@ -18,4 +18,12 @@ require('angular').module('spinningnode', [
     if(cause) { exception.message += ' (caused by "' + cause + '")'; }
     throw exception;
   };
-});
+})
+.controller('RootCtrl', [
+  '$scope',
+  function($scope) {
+    $scope.rootKeyDown = function($event) {
+      $scope.$broadcast('keydown', $event);
+    };
+  }
+]);
