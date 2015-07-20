@@ -1,0 +1,18 @@
+<table class="table table-bordered table-condensed">
+    <tr data-ng-repeat="(key, ignore) in obj" data-ng-class="{
+        'success': (diff[key].$own || diff[key] === 'same'),
+        'warning': (diff[key] === only),
+        'danger': (diff[key] === 'diff')
+        }"
+        data-ng-hide="hideSame && (diff[key].$own || diff[key] === 'same')">
+        <th>{{key}}</th>
+        <td>
+            <span data-ng-if="!isObject(diff[key])">{{obj[key]}}</span>
+            <object-diff data-ng-if="isObject(diff[key])"
+                         data-object="obj[key]"
+                         data-diff="diff[key]"
+                         data-only="only"
+                         data-hide-same="hideSame"></object-diff>
+        </td>
+    </tr>
+</table>

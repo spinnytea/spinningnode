@@ -1,0 +1,15 @@
+<h1>Data Diff</h1>
+
+<label class="checkbox-inline"><input type="checkbox" data-ng-model="input.hideSame" /> Hide Same values</label>
+
+<section>
+    <header><h2><label for="one">One</label></h2></header>
+    <textarea id="one" class="form-control" data-ng-model="input.one"></textarea>
+    <object-diff data-object="output.one" data-diff="output.diff" data-only="'one'" data-hide-same="input.hideSame"></object-diff>
+</section>
+
+<section>
+    <header><h2><label for="two">Two</label></h2></header>
+    <textarea id="two" class="form-control" data-ng-model="input.two"></textarea>
+    <object-diff data-object="output.two" data-diff="output.diff" data-only="'two'" data-hide-same="input.hideSame"></object-diff>
+</section>

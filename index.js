@@ -1,6 +1,7 @@
 'use strict';
 require('angular').module('spinningnode', [
   require('./lib/maze/mazeModule').name,
+  require('./lib/utils/datadiffModule').name,
   'ngRoute'
 ])
 .config(['$routeProvider', function($routeProvider) {
@@ -8,6 +9,11 @@ require('angular').module('spinningnode', [
     '/mazes', {
       controller: 'spinningnode.mazes.appController',
       templateUrl: 'template/maze/app.html'
+    }
+  ).when(
+    '/datadiff', {
+      controller: 'spinningnode.utils.diff.controller',
+      templateUrl: 'template/utils/datadiff.html'
     }
   ).otherwise({
     templateUrl: 'template/menu.html'
