@@ -4,7 +4,7 @@
     <table class="board noselect" ng-mouseup="markEnd()" ng-mouseleave="markEnd()">
         <tr>
             <th></th>
-            <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total)}"></th>
+            <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total),'over':(c.count>c.total)}"></th>
         </tr>
         <tr ng-repeat="row in board track by $index">
             <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total)}"></th>
