@@ -54,8 +54,10 @@
 #BattleSudoku .board td.fill {
     background: #03A9F4;
 }
-#BattleSudoku .board td.empty:hover,
-#BattleSudoku .board td.fill:hover{
+#BattleSudoku .board td.invalid {
+    background: #FFC107;
+}
+#BattleSudoku .board td:not(.none):hover {
     opacity: 0.8;
 }
 
