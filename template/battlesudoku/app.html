@@ -1,7 +1,7 @@
 <div id="BattleSudoku">
     <h1>Battle Sudoku</h1>
 
-    <table class="board noselect" ng-mouseup="markEnd()">
+    <table class="board noselect" ng-mouseup="markEnd()" ng-mouseleave="markEnd()">
         <tr>
             <th></th>
             <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total)}"></th>
