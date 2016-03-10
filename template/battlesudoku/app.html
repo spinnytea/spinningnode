@@ -1,0 +1,12 @@
+<h1>Battle Sudoku</h1>
+
+<table class="board">
+    <tr>
+        <th></th>
+        <th ng-repeat="num in board.colNums track by $index" ng-bind="num"></th>
+    </tr>
+    <tr ng-repeat="row in board track by $index">
+        <th ng-bind="board.rowNums[$index]"></th>
+        <td ng-repeat="cell in row track by $index"></td>
+    </tr>
+</table>

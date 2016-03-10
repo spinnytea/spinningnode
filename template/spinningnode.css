@@ -1,3 +1,7 @@
+h1, h2, h3, h3, h4, h5, h6 {
+    font-weight: lighter;
+}
+
 .form-horizontal > input.form-control[type="number"] {
     display: inline;
     width: 100px;
@@ -10,4 +14,19 @@ table.maze td {
     width: 20px;
     height: 20px;
     border: 0 solid darkslategray;
+}
+
+table.board {
+    margin: auto;
+}
+table.board th {
+    text-align: center;
+    vertical-align: middle;
+    width: 2em;
+    height: 2em;
+}
+table.board td {
+    border: 1px solid rgba(40, 120, 220, 0.7);
+    width: 2em;
+    height: 2em;
 }
