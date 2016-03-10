@@ -13,8 +13,7 @@ var src = [
 
 var resource = [
   './index.html',
-  './template/**/*',
-  './resource/**/*'
+  './template/**/*'
 ];
 
 gulp.task('lint', [], function () {
@@ -29,7 +28,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 
-gulp.task('build', function () {
+gulp.task('build', ['lint'], function () {
   // set up the browserify instance on a task basis
   var b = browserify({
     entries: entryPoint,
@@ -45,4 +44,8 @@ gulp.task('build', function () {
     .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('.'));
+});
+gulp.task('buildd', [], function() {
+  gulp.watch(src, ['build']);
+  gulp.start('build');
 });

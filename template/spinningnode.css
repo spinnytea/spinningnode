@@ -16,17 +16,29 @@ table.maze td {
     border: 0 solid darkslategray;
 }
 
-table.board {
+#BattleSudoku {
+    text-align: center;
+}
+#BattleSudoku .board {
     margin: auto;
 }
-table.board th {
+#BattleSudoku .board th {
     text-align: center;
     vertical-align: middle;
     width: 2em;
     height: 2em;
 }
-table.board td {
+#BattleSudoku .board td {
     border: 1px solid rgba(40, 120, 220, 0.7);
     width: 2em;
     height: 2em;
+}
+#BattleSudoku .board td:hover {
+    background: rgba(40, 120, 220, 0.3);
+}
+#BattleSudoku .board td.empty {
+    background: rgba(40, 120, 220, 0.95);
+}
+#BattleSudoku .board td.fill {
+    background: #999;
 }
