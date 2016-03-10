@@ -1,13 +1,13 @@
 <div id="BattleSudoku">
     <h1>Battle Sudoku</h1>
 
-    <table class="board" ng-mouseup="markEnd()">
+    <table class="board noselect" ng-mouseup="markEnd()">
         <tr>
             <th></th>
-            <th ng-repeat="num in board.colNums track by $index" ng-bind="num"></th>
+            <th ng-repeat="num in board.colNums track by $index" ng-bind="num" ng-class="{'done': (board.colCount[$index]===board.colNums[$index])}"></th>
         </tr>
         <tr ng-repeat="row in board track by $index">
-            <th ng-bind="board.rowNums[$index]"></th>
+            <th ng-bind="board.rowNums[$index]" ng-class="{'done': (board.rowCount[$index]===board.rowNums[$index])}"></th>
             <td ng-repeat="cell in row track by $index" class="{{cell}}" ng-mousedown="markStart($event, row, $index)" ng-mouseenter="markContinue($event, row, $index)"></td>
         </tr>
     </table>
