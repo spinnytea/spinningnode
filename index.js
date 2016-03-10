@@ -1,5 +1,5 @@
 'use strict';
-require('angular').module('spinningnode', [
+angular.module('spinningnode', [
   require('./lib/maze/mazeModule').name,
   require('./lib/utils/datadiffModule').name,
   'ngRoute'

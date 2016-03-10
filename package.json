@@ -10,28 +10,18 @@
   },
   "author": "Garrett Tjarks <spinnytea@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "socket.io": "*"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "bower": "*",
-    "browser-sync": "*",
-    "browserify": "*",
-    "exposify": "*",
-    "express": "*",
-    "globule": "*",
-    "gulp": "*",
-    "gulp-if": "*",
-    "gulp-jshint": "*",
-    "gulp-shell": "*",
-    "gulp-sourcemaps": "*",
-    "gulp-uglify": "*",
-    "gulp-util": "*",
-    "jshint-stylish": "*",
-    "ngify": "*",
-    "serve-static": "*",
-    "vinyl-buffer": "*",
-    "vinyl-source-stream": "*",
-    "watchify": "*"
+    "bower": "^1.7.7",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
