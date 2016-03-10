@@ -11,6 +11,10 @@ h1, h2, h3, h3, h4, h5, h6 {
     user-select: none;           /* non-prefixed version, currently not supported by any browser */
 }
 
+img.chromoji {
+    margin-top: -0.7em !important;
+}
+
 .form-horizontal > input.form-control[type="number"] {
     display: inline;
     width: 100px;
