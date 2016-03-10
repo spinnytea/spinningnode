@@ -41,7 +41,7 @@ table.maze td {
     color: rgba(40, 120, 220, 0.7);
 }
 #BattleSudoku .board td {
-    border: 1px solid rgba(40, 120, 220, 0.7);
+    border: 1px solid rgba(40, 120, 220, 0.3);
     width: 2em;
     height: 2em;
 }
@@ -49,8 +49,15 @@ table.maze td {
     background: rgba(40, 120, 220, 0.3);
 }
 #BattleSudoku .board td.empty {
-    background: rgba(40, 120, 220, 0.95);
+    background: rgba(40, 120, 220, 0.7);
 }
 #BattleSudoku .board td.fill {
     background: #999;
+}
+
+#BattleSudoku .lengths span {
+    margin: 0.5em;
+}
+#BattleSudoku .lengths span.done {
+    background: rgba(40, 120, 220, 0.7);
 }

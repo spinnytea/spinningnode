@@ -4,13 +4,17 @@
     <table class="board noselect" ng-mouseup="markEnd()">
         <tr>
             <th></th>
-            <th ng-repeat="num in board.colNums track by $index" ng-bind="num" ng-class="{'done': (board.colCount[$index]===board.colNums[$index])}"></th>
+            <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total)}"></th>
         </tr>
         <tr ng-repeat="row in board track by $index">
-            <th ng-bind="board.rowNums[$index]" ng-class="{'done': (board.rowCount[$index]===board.rowNums[$index])}"></th>
+            <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total)}"></th>
             <td ng-repeat="cell in row track by $index" class="{{cell}}" ng-mousedown="markStart($event, row, $index)" ng-mouseenter="markContinue($event, row, $index)"></td>
         </tr>
     </table>
+
+    <div class="lengths">
+        <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done)}"></span>
+    </div>
 
     <br>
 
