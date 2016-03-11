@@ -22,7 +22,7 @@ describe('board', function() {
   it.skip('checkWin'); // this is sort of an integration test
 
   describe('units', function() {
-    var b = board.initBoard([1, 0], [1, 0], [1]);
+    var b = board.initBoard([1, 0, 1], [1, 0, 1], [1, 1]);
     afterEach(function() {
       b[0][0].state = 'none';
       b[0][1].state = 'none';
@@ -33,10 +33,10 @@ describe('board', function() {
     it('getCell', function() {
       expect(board.units.getCell(b, 0, 0)).to.equal(b[0][0]);
       expect(board.units.getCell(b, 1, 0)).to.equal(b[1][0]);
-      expect(board.units.getCell(b, 2, 0)).to.equal(undefined);
+      expect(board.units.getCell(b, 3, 0)).to.equal(undefined);
       expect(board.units.getCell(b, -1, 0)).to.equal(undefined);
       expect(board.units.getCell(b, 0, -1)).to.equal(undefined);
-      expect(board.units.getCell(b, 0, 2)).to.equal(undefined);
+      expect(board.units.getCell(b, 0, 3)).to.equal(undefined);
     });
 
     it('getCellFill', function() {
@@ -45,7 +45,8 @@ describe('board', function() {
       expect(board.units.getCellFill(b, 1, 1)).to.equal(true);
       b[1][1].state = 'empty';
       expect(board.units.getCellFill(b, 1, 1)).to.equal(false);
-      expect(board.units.getCellFill(b, 1, 2)).to.equal(false);
+      expect(b[1][3]).to.equal(undefined);
+      expect(board.units.getCellFill(b, 1, 3)).to.equal(false);
     });
 
     it.skip('checkInvalid');
@@ -57,8 +58,36 @@ describe('board', function() {
       expect(board.units.checkInvalid.checkDiagonal(b, 0, 1)).to.equal(true);
     });
 
-    it.skip('checkLengths');
+    it('checkLengths', function() {
+      b[0][0].state = 'fill';
+      b[1][0].state = 'fill';
+      b[2][0].state = 'fill';
+      b[2][2].state = 'fill';
 
-    it.skip('checkLengths.project');
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:true},{size:1,done:false}]);
+
+      b[0][2].state = 'fill';
+
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:true},{size:1,done:true}]);
+
+      b[2][2].state = 'empty';
+      b[0][2].state = 'empty';
+
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:false},{size:1,done:false}]);
+    });
+
+    it('checkLengths.project', function() {
+      b[0][0].state = 'fill';
+      b[1][0].state = 'fill';
+      b[2][0].state = 'fill';
+      expect(board.units.checkLengths.project(b, 0, 0, 1, 0)).to.equal(3);
+      expect(board.units.checkLengths.project(b, 0, 0, 0, 1)).to.equal(1);
+      b[1][0].invalid = true;
+      expect(board.units.checkLengths.project(b, 0, 0, 1, 0)).to.equal(undefined);
+      expect(board.units.checkLengths.project(b, 0, 0, 0, 1)).to.equal(1);
+    });
   }); // end units
 }); // end board

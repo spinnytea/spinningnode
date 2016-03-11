@@ -10,7 +10,9 @@
   },
   "author": "Garrett Tjarks <spinnytea@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.6.1"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "browserify": "^13.0.0",
