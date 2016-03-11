@@ -8,7 +8,7 @@
         </tr>
         <tr ng-repeat="row in board track by $index">
             <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total)}"></th>
-            <td ng-repeat="cell in row track by $index" class="{{cell}}" ng-mousedown="markStart($event, row, $index)" ng-mouseenter="markContinue($event, row, $index)"></td>
+            <td ng-repeat="cell in row track by $index" class="{{cell.state}}" ng-class="{'invalid':cell.invalid}" ng-mousedown="markStart($event, cell)" ng-mouseenter="markContinue($event, cell)"></td>
         </tr>
     </table>
 
