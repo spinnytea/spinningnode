@@ -7,7 +7,7 @@
             <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total),'over':(c.count>c.total)}"></th>
         </tr>
         <tr ng-repeat="row in board track by $index">
-            <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total)}"></th>
+            <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total),'over':(board.row[$index].count>board.row[$index].total)}"></th>
             <td ng-repeat="cell in row track by $index" class="{{cell.state}}" ng-class="{'invalid':cell.invalid}" ng-mousedown="markStart($event, cell)" ng-mouseenter="markContinue($event, cell)"></td>
         </tr>
     </table>
