@@ -1,7 +1,8 @@
 'use strict';
+var browserify = require('browserify');
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var browserify = require('browserify');
+var mocha = require('gulp-mocha');
 
 var entryPoint = './index.js';
 var outputName = 'spinningnode.js';
@@ -48,4 +49,13 @@ gulp.task('build', ['lint'], function () {
 gulp.task('buildd', [], function() {
   gulp.watch(src, ['build']);
   gulp.start('build');
+});
+
+gulp.task('mocha', ['lint'], function() {
+  return gulp.src('test/**/*.js', {read: false})
+    .pipe(mocha({reporter: 'nyan'}));
+});
+gulp.task('test', [], function() {
+  gulp.watch(['lib/**/*.js', 'test/**/*.js'], ['mocha']);
+  gulp.start('mocha');
 });
