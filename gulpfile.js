@@ -1,5 +1,6 @@
 'use strict';
 var browserify = require('browserify');
+var express = require('express');
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
@@ -58,4 +59,10 @@ gulp.task('mocha', ['lint'], function() {
 gulp.task('test', [], function() {
   gulp.watch(['lib/**/*.js', 'test/**/*.js'], ['mocha']);
   gulp.start('mocha');
+});
+
+gulp.task('host', function() {
+  var app = express();
+  app.use(express.static('.'));
+  app.listen(3000, function() {});
 });
