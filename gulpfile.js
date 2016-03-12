@@ -37,6 +37,9 @@ gulp.task('build', ['lint'], function () {
     debug: true
   });
 
+  gulp.src('index.html')
+    .pipe(gulp.dest('dist'));
+
   return b.bundle()
     .pipe(source(outputName))
     .pipe(buffer())
@@ -45,7 +48,7 @@ gulp.task('build', ['lint'], function () {
     .pipe(uglify())
     .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest('dist'));
 });
 gulp.task('buildd', [], function() {
   gulp.watch(src, ['build']);
@@ -63,6 +66,8 @@ gulp.task('test', [], function() {
 
 gulp.task('host', function() {
   var app = express();
-  app.use(express.static('.'));
+  app.use('/vendor', express.static('vendor'));
+  app.use('/template', express.static('template'));
+  app.use('/', express.static('dist'));
   app.listen(3000, function() {});
 });
