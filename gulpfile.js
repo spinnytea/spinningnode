@@ -64,11 +64,14 @@ gulp.task('test', [], function() {
   gulp.start('mocha');
 });
 
-gulp.task('host', function() {
+gulp.task('host', [], function() {
   var app = express();
   app.use('/vendor', express.static('vendor'));
   app.use('/template', express.static('template'));
   app.use('/', express.static('dist'));
   app.listen(3000, function() {});
+});
+gulp.task('hostd', [], function() {
+  gulp.start('host');
   gulp.start('buildd');
 });

@@ -13,7 +13,7 @@ describe('auto', function() {
 
   describe('units', function() {
     it('init', function() {
-      expect(Object.keys(auto.units)).to.deep.equal(['availableBoard', 'getCounts', 'canPlace', 'doPlace']);
+      expect(Object.keys(auto.units)).to.deep.equal(['availableBoard', 'getCounts', 'canPlace', 'doPlace', 'pickAPiece']);
     });
 
     it('availableBoard', function() {
@@ -104,5 +104,8 @@ describe('auto', function() {
         [false, true, true, true]
       ]);
     });
+
+    // I'm not sure how to unit test this
+    it.skip('pickAPiece');
   }); // end units
 }); // end auto
