@@ -13,37 +13,31 @@ describe('auto', function() {
 
   describe('units', function() {
     it('init', function() {
-      expect(Object.keys(auto.units)).to.deep.equal(['availableBoard', 'redoCounts', 'canPlace', 'doPlace']);
+      expect(Object.keys(auto.units)).to.deep.equal(['availableBoard', 'getCounts', 'canPlace', 'doPlace']);
     });
 
     it('availableBoard', function() {
       var a = auto.units.availableBoard(1, 1);
-      expect(a.length).to.equal(1);
-      expect(a[0]).to.deep.equal([true]);
-      expect(a.row).to.deep.equal([0]);
-      expect(a.col).to.deep.equal([0]);
+      expect(a).to.deep.equal([[true]]);
 
       a = auto.units.availableBoard(2, 3);
-      expect(a.length).to.equal(2);
-      expect(a[0]).to.deep.equal([true, true, true]);
-      expect(a.row).to.deep.equal([0, 0]);
-      expect(a.col).to.deep.equal([0, 0, 0]);
+      expect(a).to.deep.equal([[true, true, true],[true, true, true]]);
     });
 
-    it('redoCounts', function() {
+    it('getCounts', function() {
       var a = auto.units.availableBoard(2, 3);
-      auto.units.redoCounts(a);
+      var c = auto.units.getCounts(a);
 
-      expect(a.row).to.deep.equal([0, 0]);
-      expect(a.col).to.deep.equal([0, 0, 0]);
+      expect(c.row).to.deep.equal([0, 0]);
+      expect(c.col).to.deep.equal([0, 0, 0]);
 
       a[0][0] = false;
       a[0][1] = false;
       a[1][1] = false;
-      auto.units.redoCounts(a);
+      c =  auto.units.getCounts(a);
 
-      expect(a.row).to.deep.equal([2, 1]);
-      expect(a.col).to.deep.equal([1, 2, 0]);
+      expect(c.row).to.deep.equal([2, 1]);
+      expect(c.col).to.deep.equal([1, 2, 0]);
     });
 
     it('canPlace', function() {
@@ -74,28 +68,41 @@ describe('auto', function() {
       expect(auto.units.canPlace(a, 0, 3, 3, false)).to.equal(false);
       expect(auto.units.canPlace(a, 0, 2, 2, false)).to.equal(true);
       expect(auto.units.canPlace(a, 0, 3, 2, false)).to.equal(true);
+
+      expect(a).to.deep.equal([
+        [true, true, true, true],
+        [true, true, true, true],
+        [true, true, true, true],
+        [true, true, true, false]
+      ]);
     });
 
     it('doPlace', function() {
       var a = auto.units.availableBoard(4, 4);
 
       auto.units.doPlace(a, 0, 0, 4, true);
-      expect(a[0]).to.deep.equal([false, false, false, false]);
-      expect(a[1]).to.deep.equal([true, true, true, true]);
-      expect(a[2]).to.deep.equal([true, true, true, true]);
-      expect(a[3]).to.deep.equal([true, true, true, true]);
+      expect(a).to.deep.equal([
+        [false, false, false, false],
+        [true, true, true, true],
+        [true, true, true, true],
+        [true, true, true, true]
+      ]);
 
       auto.units.doPlace(a, 2, 0, 2, false);
-      expect(a[0]).to.deep.equal([false, false, false, false]);
-      expect(a[1]).to.deep.equal([true, true, true, true]);
-      expect(a[2]).to.deep.equal([false, true, true, true]);
-      expect(a[3]).to.deep.equal([false, true, true, true]);
+      expect(a).to.deep.equal([
+        [false, false, false, false],
+        [true, true, true, true],
+        [false, true, true, true],
+        [false, true, true, true]
+      ]);
 
       auto.units.doPlace(a, 2, 2, 1, false);
-      expect(a[0]).to.deep.equal([false, false, false, false]);
-      expect(a[1]).to.deep.equal([true, true, true, true]);
-      expect(a[2]).to.deep.equal([false, true, false, true]);
-      expect(a[3]).to.deep.equal([false, true, true, true]);
+      expect(a).to.deep.equal([
+        [false, false, false, false],
+        [true, true, true, true],
+        [false, true, false, true],
+        [false, true, true, true]
+      ]);
     });
   }); // end units
 }); // end auto
