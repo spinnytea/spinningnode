@@ -70,4 +70,5 @@ gulp.task('host', function() {
   app.use('/template', express.static('template'));
   app.use('/', express.static('dist'));
   app.listen(3000, function() {});
+  gulp.start('buildd');
 });

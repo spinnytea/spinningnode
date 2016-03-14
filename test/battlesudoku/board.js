@@ -3,6 +3,10 @@ var expect = require('chai').expect;
 var board = require('../../lib/battlesudoku/board');
 
 describe('board', function() {
+  it('init', function() {
+    expect(Object.keys(board)).to.deep.equal(['initBoard', 'redoCounts', 'checkWin']);
+  });
+
   it('initBoard', function() {
     var b = board.initBoard([1, 2, 1], [2, 0, 0, 2], [2, 2]);
 
@@ -28,6 +32,10 @@ describe('board', function() {
       b[0][1].state = 'none';
       b[1][0].state = 'none';
       b[1][1].state = 'none';
+    });
+
+    it('init', function() {
+      expect(Object.keys(board.units)).to.deep.equal(['getCell', 'getCellFill', 'checkInvalid', 'checkLengths']);
     });
 
     it('getCell', function() {
