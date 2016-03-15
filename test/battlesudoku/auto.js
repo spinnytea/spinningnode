@@ -2,6 +2,7 @@
 var _ = require('lodash');
 var expect = require('chai').expect;
 var auto = require('../../lib/battlesudoku/auto');
+var board = require('../../lib/battlesudoku/board');
 
 describe('auto', function() {
   it('init', function() {
@@ -28,7 +29,53 @@ describe('auto', function() {
 
   // init board with one solution
   // solve, check result
-  it.skip('solve');
+  it.skip('solve', function() {
+    var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
+    auto.solve(b);
+  });
+
+  describe('units', function() {
+    var bak = _.clone(auto.units);
+    afterEach(function() {
+      //console.log(auto.units);
+      _.assign(auto.units, bak);
+      //console.log(auto.units);
+    });
+
+    it('solve', function() {
+      var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
+
+      auto.units.recursiveSolve = function mock(a, l, c) {
+        expect(a).to.deep.equal([
+          [true, true, true],
+          [true, true, true],
+          [true, true, true],
+        ]);
+        expect(l).to.deep.equal([1, 3]);
+        expect(c).to.deep.equal({row: [1, 2, 1], col: [1, 0, 3]});
+
+        return [
+          [true, true, false],
+          [false, true, false],
+          [true, true, false],
+        ];
+      };
+
+      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+        ['none', 'none', 'none'],
+        ['none', 'none', 'none'],
+        ['none', 'none', 'none'],
+      ]);
+
+      auto.solve(b);
+
+      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+        ['empty', 'empty', 'fill'],
+        ['fill', 'empty', 'fill'],
+        ['empty', 'empty', 'fill'],
+      ]);
+    });
+  }); // end units
 
   describe('units', function() {
     it('init', function() {
@@ -170,7 +217,20 @@ describe('auto', function() {
       // 001|0
     });
 
-    it.skip('cloneAvailable');
+    it('cloneAvailable', function() {
+      var a = [[true]];
+      var c = auto.units.cloneAvailable(a);
+      expect(a).to.deep.equal(c);
+      expect(a).to.not.equal(c);
+      expect(a[0]).to.not.equal(c[0]);
+
+      a = [[false, true], [true, false]];
+      c = auto.units.cloneAvailable(a);
+      expect(a).to.deep.equal(c);
+      expect(a).to.not.equal(c);
+      expect(a[0]).to.not.equal(c[0]);
+      expect(a[1]).to.not.equal(c[1]);
+    });
 
     it.skip('recursiveSolve', function() {
       //expect(auto.units.recursiveSolve([[true]], [1])).to.deep.equal([[false]]);
