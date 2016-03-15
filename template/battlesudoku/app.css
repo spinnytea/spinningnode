@@ -28,9 +28,13 @@
     background-color: #03A9F4;
     border-color: #03A9F4;
 }
+#BattleSudoku input[type="number"] {
+    width: 4em;
+}
 
 #BattleSudoku .score {
     font-size: 5em;
+    font-weight: lighter;
 }
 #BattleSudoku .score .win {
     color: #0288D1;

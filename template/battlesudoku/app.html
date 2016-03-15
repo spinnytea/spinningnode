@@ -27,8 +27,9 @@
     <div class="lengths">
         <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done)}"></span>
     </div>
-    <p>
+    <p class="form-inline">
         <button class="btn btn-default" ng-click="reset()">Reset</button>
+        <input class="form-control" type="number" ng-model="boardSize" />
         <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()">New Game</button>
     </p>
 
