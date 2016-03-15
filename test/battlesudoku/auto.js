@@ -1,4 +1,5 @@
 'use strict';
+var _ = require('lodash');
 var expect = require('chai').expect;
 var auto = require('../../lib/battlesudoku/auto');
 
@@ -7,8 +8,26 @@ describe('auto', function() {
     expect(Object.keys(auto)).to.deep.equal(['generate', 'solve']);
   });
 
-  it.skip('generate');
+  it('generate', function() {
+    var b = auto.generate(1);
+    expect(b.row).to.deep.equal([{count: 0, total: 1}]);
+    expect(b.col).to.deep.equal([{count: 0, total: 1}]);
+    expect(b.len).to.deep.equal([{size: 1, done: false}]);
+    expect(b[0][0]).to.deep.equal({state: 'none'});
 
+    b = auto.generate(4, 6);
+    expect(b.row.length).to.equal(4);
+    expect(b.col.length).to.equal(6);
+    expect(b.len.length).to.be.greaterThan(0);
+    var rowCount = _.sumBy(b.row, 'total');
+    var colCount = _.sumBy(b.col, 'total');
+    var lenCount = _.sumBy(b.len, 'size');
+    expect(lenCount).to.equal(colCount);
+    expect(lenCount).to.equal(rowCount);
+  });
+
+  // init board with one solution
+  // solve, check result
   it.skip('solve');
 
   describe('units', function() {
@@ -16,6 +35,7 @@ describe('auto', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths',
+        'cloneAvailable', 'recursiveSolve',
       ]);
     });
 
@@ -148,6 +168,12 @@ describe('auto', function() {
       // 000|2
       // 000|0
       // 001|0
+    });
+
+    it.skip('cloneAvailable');
+
+    it.skip('recursiveSolve', function() {
+      //expect(auto.units.recursiveSolve([[true]], [1])).to.deep.equal([[false]]);
     });
   }); // end units
 }); // end auto
