@@ -29,9 +29,22 @@ describe('auto', function() {
 
   // init board with one solution
   // solve, check result
-  it.skip('solve', function() {
+  it('solve', function() {
     var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
+
+    expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+      ['none', 'none', 'none'],
+      ['none', 'none', 'none'],
+      ['none', 'none', 'none'],
+    ]);
+
     auto.solve(b);
+
+    expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+      ['empty', 'empty', 'fill'],
+      ['fill', 'empty', 'fill'],
+      ['empty', 'empty', 'fill'],
+    ]);
   });
 
   describe('units', function() {
@@ -82,7 +95,7 @@ describe('auto', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths',
-        'cloneAvailable', 'recursiveSolve',
+        'recursiveSolve',
       ]);
     });
 
@@ -217,23 +230,10 @@ describe('auto', function() {
       // 001|0
     });
 
-    it('cloneAvailable', function() {
-      var a = [[true]];
-      var c = auto.units.cloneAvailable(a);
-      expect(a).to.deep.equal(c);
-      expect(a).to.not.equal(c);
-      expect(a[0]).to.not.equal(c[0]);
-
-      a = [[false, true], [true, false]];
-      c = auto.units.cloneAvailable(a);
-      expect(a).to.deep.equal(c);
-      expect(a).to.not.equal(c);
-      expect(a[0]).to.not.equal(c[0]);
-      expect(a[1]).to.not.equal(c[1]);
-    });
-
-    it.skip('recursiveSolve', function() {
-      //expect(auto.units.recursiveSolve([[true]], [1])).to.deep.equal([[false]]);
+    it('recursiveSolve', function() {
+      expect(auto.units.recursiveSolve([[false]], [], {row:[0],col:[0]})).to.deep.equal([[false]]);
+      expect(auto.units.recursiveSolve([[true]], [1], {row:[1],col:[1]})).to.deep.equal([[false]]);
+      expect(auto.units.recursiveSolve([[true, true]], [2], {row:[2],col:[1, 1]})).to.deep.equal([[false, false]]);
     });
   }); // end units
 }); // end auto
