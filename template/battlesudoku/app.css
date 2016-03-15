@@ -18,6 +18,17 @@
     background-color: #FFFFFF;
     border: 2px solid #03A9F4;
 }
+#BattleSudoku .btn-default {
+    color: #212121;
+    background-color: #FFFFFF;
+    border-color: #B6B6B6;
+}
+#BattleSudoku .btn-primary {
+    color: #FFFFFF;
+    background-color: #03A9F4;
+    border-color: #03A9F4;
+}
+
 #BattleSudoku .board {
     margin: auto;
     position: relative;
