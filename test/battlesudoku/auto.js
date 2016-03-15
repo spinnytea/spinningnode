@@ -15,7 +15,7 @@ describe('auto', function() {
     it('init', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
-        'pickAPiece', 'findRowLengths', 'findColLengths', 'findAllLengths',
+        'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths',
       ]);
     });
 
@@ -109,7 +109,7 @@ describe('auto', function() {
     });
 
     // I'm not sure how to unit test this
-    it.skip('pickAPiece');
+    it.skip('pickALength');
 
     it('findRowLengths', function() {
       var a = auto.units.availableBoard(4, 3);
