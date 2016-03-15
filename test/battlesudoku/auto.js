@@ -55,39 +55,109 @@ describe('auto', function() {
       //console.log(auto.units);
     });
 
-    it('solve', function() {
-      var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
+    describe('solve', function() {
+      it('empty', function() {
+        var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
 
-      auto.units.recursiveSolve = function mock(a, l, c) {
-        expect(a).to.deep.equal([
-          [true, true, true],
-          [true, true, true],
-          [true, true, true],
+        auto.units.recursiveSolve = function mock(a, l, c) {
+          expect(a).to.deep.equal([
+            [true, true, true],
+            [true, true, true],
+            [true, true, true],
+          ]);
+          expect(l).to.deep.equal([1, 3]);
+          expect(c).to.deep.equal({row: [1, 2, 1], col: [1, 0, 3]});
+
+          return [
+            [true, true, false],
+            [false, true, false],
+            [true, true, false],
+          ];
+        };
+
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['none', 'none', 'none'],
+          ['none', 'none', 'none'],
+          ['none', 'none', 'none'],
         ]);
-        expect(l).to.deep.equal([1, 3]);
-        expect(c).to.deep.equal({row: [1, 2, 1], col: [1, 0, 3]});
 
-        return [
-          [true, true, false],
-          [false, true, false],
-          [true, true, false],
-        ];
-      };
+        auto.solve(b);
 
-      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
-        ['none', 'none', 'none'],
-        ['none', 'none', 'none'],
-        ['none', 'none', 'none'],
-      ]);
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['empty', 'empty', 'fill'],
+          ['fill', 'empty', 'fill'],
+          ['empty', 'empty', 'fill'],
+        ]);
+      });
 
-      auto.solve(b);
+      it('prefilled a', function() {
+        var b = board.initBoard([1, 2, 1], [2, 0, 2], [2, 2]);
+        b[0][0].state = 'fill';
+        b[1][0].state = 'fill';
+        board.redoCounts(b);
+        board.units.checkLengths(b);
 
-      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
-        ['empty', 'empty', 'fill'],
-        ['fill', 'empty', 'fill'],
-        ['empty', 'empty', 'fill'],
-      ]);
-    });
+        auto.units.recursiveSolve = function mock(a, l, c) {
+          expect(a).to.deep.equal([
+            [false, true, true],
+            [false, true, true],
+            [true, true, true],
+          ]);
+          expect(l).to.deep.equal([2]);
+          expect(c).to.deep.equal({row: [0, 1, 1], col: [0, 0, 2]});
+
+          return bak.recursiveSolve(a, l, c);
+        };
+
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['fill', 'none', 'none'],
+          ['fill', 'none', 'none'],
+          ['none', 'none', 'none'],
+        ]);
+
+        auto.solve(b);
+
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['fill', 'empty', 'empty'],
+          ['fill', 'empty', 'fill'],
+          ['empty', 'empty', 'fill'],
+        ]);
+      });
+
+      it('prefilled b', function() {
+        var b = board.initBoard([1, 2, 1], [2, 0, 2], [2, 2]);
+        b[0][2].state = 'fill';
+        b[1][2].state = 'fill';
+        board.redoCounts(b);
+        board.units.checkLengths(b);
+
+        auto.units.recursiveSolve = function mock(a, l, c) {
+          expect(a).to.deep.equal([
+            [true, true, false],
+            [true, true, false],
+            [true, true, true],
+          ]);
+          expect(l).to.deep.equal([2]);
+          expect(c).to.deep.equal({row: [0, 1, 1], col: [2, 0, 0]});
+
+          return bak.recursiveSolve(a, l, c);
+        };
+
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['none', 'none', 'fill'],
+          ['none', 'none', 'fill'],
+          ['none', 'none', 'none'],
+        ]);
+
+        auto.solve(b);
+
+        expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+          ['empty', 'empty', 'fill'],
+          ['fill', 'empty', 'fill'],
+          ['fill', 'empty', 'empty'],
+        ]);
+      });
+    }); // end solve
   }); // end units
 
   describe('units', function() {
