@@ -200,6 +200,8 @@ describe('auto', function() {
 
       expect(auto.units.findRowLengths(a, 0, 2)).to.deep.equal([{r:0,c:0,l:2,d:true}, {r:0,c:1,l:2,d:true}]);
       expect(auto.units.findRowLengths(a, 3, 2)).to.deep.equal([]);
+
+      expect(auto.units.findRowLengths(a, 0, 2, [1, 1, 0])).to.deep.equal([{r:0,c:0,l:2,d:true}]);
     });
 
     it('findColLengths', function() {
@@ -211,6 +213,8 @@ describe('auto', function() {
 
       expect(auto.units.findColLengths(a, 0, 3)).to.deep.equal([{r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false}]);
       expect(auto.units.findColLengths(a, 2, 3)).to.deep.equal([]);
+
+      expect(auto.units.findColLengths(a, 0, 3, [1, 1, 1, 0])).to.deep.equal([{r:0,c:0,l:3,d:false}]);
     });
 
     it('findAllLengths', function() {

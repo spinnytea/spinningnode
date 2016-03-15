@@ -31,6 +31,7 @@
         <button class="btn btn-default" ng-click="reset()">Reset</button>
         <input class="form-control" type="number" ng-model="boardSize" />
         <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()">New Game</button>
+        <button class="btn btn-default" ng-click="solveBoard()">Auto Solve</button>
     </p>
 
     <div class="jumbotron" ng-show="win">
