@@ -13,7 +13,10 @@ describe('auto', function() {
 
   describe('units', function() {
     it('init', function() {
-      expect(Object.keys(auto.units)).to.deep.equal(['availableBoard', 'getCounts', 'canPlace', 'doPlace', 'pickAPiece']);
+      expect(Object.keys(auto.units)).to.deep.equal([
+        'availableBoard', 'getCounts', 'canPlace', 'doPlace',
+        'pickAPiece', 'findRowLengths', 'findColLengths', 'findAllLengths',
+      ]);
     });
 
     it('availableBoard', function() {
@@ -107,5 +110,44 @@ describe('auto', function() {
 
     // I'm not sure how to unit test this
     it.skip('pickAPiece');
+
+    it('findRowLengths', function() {
+      var a = auto.units.availableBoard(4, 3);
+      a[3][2] = false;
+
+      expect(auto.units.findRowLengths(a, 1)).to.deep.equal([{r:1,c:0,l:3,d:true}]);
+      expect(auto.units.findRowLengths(a, 2)).to.deep.equal([{r:2,c:0,l:1,d:true}]);
+
+      expect(auto.units.findRowLengths(a, 0, 2)).to.deep.equal([{r:0,c:0,l:2,d:true}, {r:0,c:1,l:2,d:true}]);
+      expect(auto.units.findRowLengths(a, 3, 2)).to.deep.equal([]);
+    });
+
+    it('findColLengths', function() {
+      var a = auto.units.availableBoard(4, 3);
+      a[3][2] = false;
+
+      expect(auto.units.findColLengths(a, 0)).to.deep.equal([{r:0,c:0,l:4,d:false}]);
+      expect(auto.units.findColLengths(a, 2)).to.deep.equal([{r:0,c:2,l:2,d:false}]);
+
+      expect(auto.units.findColLengths(a, 0, 3)).to.deep.equal([{r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false}]);
+      expect(auto.units.findColLengths(a, 2, 3)).to.deep.equal([]);
+    });
+
+    it('findAllLengths', function() {
+      var a = auto.units.availableBoard(4, 3);
+      a[3][2] = false;
+      expect(auto.units.findAllLengths(a)).to.deep.equal([{r:0,c:0,l:4,d:false}]);
+      expect(auto.units.findAllLengths(a, 3)).to.deep.equal([
+        {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
+        {r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false}
+      ]);
+      expect(auto.units.findAllLengths(a, 2).length).to.equal(9);
+      // 311 9
+      // ---+
+      // 000|2
+      // 000|2
+      // 000|0
+      // 001|0
+    });
   }); // end units
 }); // end auto
