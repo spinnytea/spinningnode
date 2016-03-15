@@ -52,7 +52,7 @@ describe('auto', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths',
-        'recursiveSolve', 'updateRecursiveCounts',
+        'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
       ]);
     });
 
@@ -220,6 +220,15 @@ describe('auto', function() {
         .to.deep.equal({ row: [1, 1, 1], col: [0, 0, 3] });
       expect(auto.units.updateRecursiveCounts({ row: [1, 2, 1], col: [1, 0, 3] }, {r:0,c:2,l:3,d:false}))
         .to.deep.equal({ row: [0, 1, 0], col: [1, 0, 0] });
+    });
+
+    it('updateBoard', function() {
+      var b = board.initBoard([1, 0], [1, 0], [1]);
+      auto.units.updateBoard([[false, true], [true, true]], b);
+      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+        ['fill', 'empty'],
+        ['empty', 'empty'],
+      ]);
     });
   }); // end units
 }); // end auto
