@@ -29,6 +29,16 @@
     border-color: #03A9F4;
 }
 
+#BattleSudoku .score {
+    font-size: 5em;
+}
+#BattleSudoku .score .win {
+    color: #0288D1;
+}
+#BattleSudoku .score .auto {
+    color: #FFC107;
+}
+
 #BattleSudoku .board {
     margin: auto;
     position: relative;
