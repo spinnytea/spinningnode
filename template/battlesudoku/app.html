@@ -1,28 +1,16 @@
 <div id="BattleSudoku">
     <h1>Battle Sudoku</h1>
 
-    <div class="row">
-        <div class="col-sm-4 score">
-            <span class="new" ng-bind="counts.new"></span>
-            <span class="win" ng-bind="counts.win"></span>
-        </div>
-        <div class="col-sm-4">
-            <table class="board noselect" ng-mouseup="markEnd()" ng-mouseleave="markEnd()">
-                <tr>
-                    <th></th>
-                    <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total),'over':(c.count>c.total)}"></th>
-                </tr>
-                <tr ng-repeat="row in board track by $index">
-                    <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total),'over':(board.row[$index].count>board.row[$index].total)}"></th>
-                    <td ng-repeat="cell in row track by $index" class="{{cell.state}}" ng-class="{'invalid':cell.invalid}" ng-mousedown="markStart($event, cell)" ng-mouseenter="markContinue($event, cell)"></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-sm-4 score">
-            <span class="auto" ng-bind="counts.auto"></span>
-            <span class="reset" ng-bind="counts.reset"></span>
-        </div>
-    </div>
+    <table class="board noselect" ng-mouseup="markEnd()" ng-mouseleave="markEnd()">
+        <tr>
+            <th></th>
+            <th ng-repeat="c in board.col track by $index" ng-bind="c.total" ng-class="{'done':(c.count===c.total),'over':(c.count>c.total)}"></th>
+        </tr>
+        <tr ng-repeat="row in board track by $index">
+            <th ng-bind="board.row[$index].total" ng-class="{'done':(board.row[$index].count===board.row[$index].total),'over':(board.row[$index].count>board.row[$index].total)}"></th>
+            <td ng-repeat="cell in row track by $index" class="{{cell.state}}" ng-class="{'invalid':cell.invalid}" ng-mousedown="markStart($event, cell)" ng-mouseenter="markContinue($event, cell)"></td>
+        </tr>
+    </table>
 
     <div class="lengths">
         <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done)}"></span>
@@ -36,5 +24,6 @@
 
     <div class="jumbotron" ng-show="win">
         <h1>&#x1F389; You Did It! &#x1F38A;</h1>
+        <p><span ng-bind="counts.win"></span> to <span ng-bind="counts.auto"></span> out of <span ng-bind="counts.new"></span></p>
     </div>
 </div>
