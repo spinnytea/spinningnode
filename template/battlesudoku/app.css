@@ -31,6 +31,9 @@
 #BattleSudoku input[type="number"] {
     width: 4em;
 }
+#BattleSudoku .form-control {
+    border-color: rgb(182, 182, 182);
+}
 
 #BattleSudoku .board {
     margin: auto;
