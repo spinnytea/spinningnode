@@ -40,6 +40,7 @@ describe('auto', function() {
 
     auto.solve(b);
 
+    expect(board.checkWin(b)).to.equal(true);
     expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
       ['empty', 'empty', 'fill'],
       ['fill', 'empty', 'fill'],
@@ -223,6 +224,8 @@ describe('auto', function() {
       expect(auto.units.recursiveSolve([['none']], [1], {row:[1],col:[1]})).to.deep.equal([['fill']]);
       expect(auto.units.recursiveSolve([['none', 'none']], [2], {row:[2],col:[1, 1]})).to.deep.equal([['fill', 'fill']]);
     });
+
+    it.skip('verify recursive copy/no copy');
 
     it('updateRecursiveCounts', function() {
       expect(auto.units.updateRecursiveCounts({ row: [1, 2, 1], col: [1, 0, 3] }, {r:1,c:0,l:1,d:true}))
