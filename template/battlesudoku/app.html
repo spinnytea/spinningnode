@@ -16,10 +16,10 @@
         <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done)}"></span>
     </div>
     <p class="form-inline">
-        <button class="btn btn-default" ng-click="reset()"><i class="fa fa-fw fa-undo"></i></button>
+        <button class="btn btn-default" ng-click="reset()" title="Reset"><i class="fa fa-fw fa-undo"></i></button>
         <input class="form-control" type="number" ng-model="boardSize" />
-        <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()">New Game</button>
-        <button class="btn btn-default" ng-click="solveBoard()"><i class="fa fa-fw fa-bolt"></i></button>
+        <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()" title="New Game"><i class="fa fa-fw fa-dot-circle-o"></i></button>
+        <button class="btn btn-default" ng-click="solveBoard()" ng-disabled="win" title="Auto Solve"><i class="fa fa-fw fa-bolt"></i></button>
     </p>
 
     <div class="jumbotron" ng-show="win">
