@@ -18,7 +18,7 @@ describe('board', function() {
     expect(b[0][0]).to.deep.equal({state:'none'});
     expect(b.col[0]).to.deep.equal({count:0,total:2});
     expect(b.row[0]).to.deep.equal({count:0,total:1});
-    expect(b.len[0]).to.deep.equal({size:2,done:false});
+    expect(b.len[0]).to.deep.equal({size:2,done:false,over:false});
   });
 
   it.skip('reset');
@@ -75,18 +75,28 @@ describe('board', function() {
       b[2][2].state = 'fill';
 
       board.units.checkLengths(b);
-      expect(b.len).to.deep.equal([{size:1,done:true},{size:1,done:false}]);
+      expect(b.len).to.deep.equal([{size:1,done:true,over:false},{size:1,done:false,over:false}]);
 
       b[0][2].state = 'fill';
 
       board.units.checkLengths(b);
-      expect(b.len).to.deep.equal([{size:1,done:true},{size:1,done:true}]);
+      expect(b.len).to.deep.equal([{size:1,done:true,over:false},{size:1,done:true,over:false}]);
 
       b[2][2].state = 'empty';
       b[0][2].state = 'empty';
 
       board.units.checkLengths(b);
-      expect(b.len).to.deep.equal([{size:1,done:false},{size:1,done:false}]);
+      expect(b.len).to.deep.equal([{size:1,done:false,over:false},{size:1,done:false,over:false}]);
+
+      b[1][0].state = 'empty';
+
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:true,over:false},{size:1,done:true,over:false}]);
+
+      b[2][2].state = 'fill';
+      
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:false,over:true},{size:1,done:false,over:true}]);
     });
 
     it('checkLengths.project', function() {

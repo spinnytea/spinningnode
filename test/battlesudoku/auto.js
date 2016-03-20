@@ -13,7 +13,7 @@ describe('auto', function() {
     var b = auto.generate(1);
     expect(b.row).to.deep.equal([{count: 0, total: 1}]);
     expect(b.col).to.deep.equal([{count: 0, total: 1}]);
-    expect(b.len).to.deep.equal([{size: 1, done: false}]);
+    expect(b.len).to.deep.equal([{size: 1, done: false, over: false}]);
     expect(b[0][0]).to.deep.equal({state: 'none'});
 
     b = auto.generate(4, 6);

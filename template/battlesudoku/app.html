@@ -13,7 +13,7 @@
     </table>
 
     <div class="lengths">
-        <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done)}"></span>
+        <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done),'over':(l.over)}"></span>
     </div>
     <p class="form-inline">
         <button class="btn btn-default" ng-click="reset()" title="Reset"><i class="fa fa-fw fa-undo"></i></button>
