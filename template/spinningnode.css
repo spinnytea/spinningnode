@@ -20,6 +20,10 @@ img.chromoji {
     width: 100px;
 }
 
+.btn .fa {
+    line-height: 1.42857143em;
+}
+
 table.maze {
     margin-bottom: 15px;
 }
