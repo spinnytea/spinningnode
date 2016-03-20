@@ -1,0 +1,88 @@
+@import '../palette/light-blue';
+
+/* TODO "lower" empty, "raise" fill */
+/* TODO mark too many 'done' lengths with accent */
+/* TODO interchangable themes; mint */
+
+body {
+    background-color: @textPrimaryColor;
+}
+
+#BattleSudoku {
+    text-align: center;
+}
+#BattleSudoku h1 {
+    color: @primaryTextColor;
+}
+#BattleSudoku .jumbotron {
+    background-color: @textPrimaryColor;
+    border: 2px solid @primaryColor;
+}
+#BattleSudoku .btn-default {
+    color: @primaryTextColor;
+    background-color: @textPrimaryColor;
+    border-color: @dividerColor;
+}
+#BattleSudoku .btn-primary {
+    color: @textPrimaryColor;
+    background-color: @primaryColor;
+    border-color: @primaryColor;
+}
+#BattleSudoku input[type="number"] {
+    width: 4em;
+}
+#BattleSudoku .form-control {
+    border-color: @dividerColor;
+}
+
+#BattleSudoku .board {
+    margin: auto;
+    position: relative;
+    left: -1em;
+}
+#BattleSudoku .board th {
+    color: @secondaryTextColor;
+    text-align: center;
+    vertical-align: middle;
+    width: 2em;
+    height: 2em;
+}
+#BattleSudoku .board th.done {
+    color: @primaryColor;
+}
+#BattleSudoku .board th.over {
+    color: @accentColor;
+}
+#BattleSudoku .board td {
+    border: 1px solid @primaryColor;
+    width: 2em;
+    height: 2em;
+}
+#BattleSudoku .board td.none {
+    background: @textPrimaryColor;
+}
+#BattleSudoku .board td.none:hover {
+    background: @primaryColor;
+    opacity: 0.2;
+}
+#BattleSudoku .board td.empty {
+    background: @dividerColor;
+}
+#BattleSudoku .board td.fill {
+    background: @primaryColor;
+}
+#BattleSudoku .board td.fill.invalid {
+    background: @accentColor;
+}
+#BattleSudoku .board td:not(.none):hover {
+    opacity: 0.8;
+}
+
+#BattleSudoku .lengths span {
+    color: @textPrimaryColor;
+    background: @secondaryTextColor;
+    margin: 0.5em;
+}
+#BattleSudoku .lengths span.done {
+    background: @primaryColor;
+}

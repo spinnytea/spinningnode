@@ -1,9 +1,16 @@
 'use strict';
 var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
 var express = require('express');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
+var less = require('gulp-less');
+var minifyCSS = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
+var source = require('vinyl-source-stream');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
 
 var entryPoint = './index.js';
 var outputName = 'spinningnode.js';
@@ -14,9 +21,8 @@ var src = [
 ];
 
 var resource = [
-  './index.html',
-  './template/**/*'
-];
+  'template/**/*.less'
+].concat(src);
 
 gulp.task('lint', [], function () {
   return gulp.src(src).pipe(jshint())
@@ -24,13 +30,17 @@ gulp.task('lint', [], function () {
     .pipe(jshint.reporter('fail'));
 });
 
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
-var gutil = require('gulp-util');
-
-gulp.task('build', ['lint'], function () {
+gulp.task('build-less', [], function() {
+  return gulp.src(['template/**/*.less', '!template/palette/*.less'])
+    .pipe(sourcemaps.init())
+    .pipe(less({
+      paths: [ 'template/palette' ]
+    }))
+    .pipe(minifyCSS())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/template'));
+});
+gulp.task('build-js', ['lint'], function () {
   // set up the browserify instance on a task basis
   var b = browserify({
     entries: entryPoint,
@@ -47,11 +57,12 @@ gulp.task('build', ['lint'], function () {
     // Add transformation tasks to the pipeline here.
     .pipe(uglify())
     .on('error', gutil.log)
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
 });
+gulp.task('build', ['build-js', 'build-less'], function() {});
 gulp.task('buildd', [], function() {
-  gulp.watch(src, ['build']);
+  gulp.watch(resource, ['build']);
   gulp.start('build');
 });
 
