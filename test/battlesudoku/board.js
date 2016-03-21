@@ -97,6 +97,11 @@ describe('board', function() {
       
       board.units.checkLengths(b);
       expect(b.len).to.deep.equal([{size:1,done:false,over:true},{size:1,done:false,over:true}]);
+
+      b[1][0].state = 'fill';
+
+      board.units.checkLengths(b);
+      expect(b.len).to.deep.equal([{size:1,done:true,over:false},{size:1,done:false,over:false}]);
     });
 
     it('checkLengths.project', function() {

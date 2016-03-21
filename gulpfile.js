@@ -36,6 +36,7 @@ gulp.task('build-less', [], function() {
     .pipe(less({
       paths: [ 'template/palette' ]
     }))
+    .on('error', function() { gutil.log(arguments); this.emit('end'); })
     .pipe(minifyCSS())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/template'));
