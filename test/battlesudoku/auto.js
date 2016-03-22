@@ -208,7 +208,7 @@ describe('auto', function() {
       expect(auto.units.findAllLengths(a)).to.deep.equal([{r:0,c:0,l:4,d:false}]);
       expect(auto.units.findAllLengths(a, 3)).to.deep.equal([
         {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
-        {r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false}
+        {r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false},
       ]);
       expect(auto.units.findAllLengths(a, 2).length).to.equal(9);
       // 311 9
@@ -217,6 +217,15 @@ describe('auto', function() {
       // 000|2
       // 000|0
       // 001|0
+
+      expect(auto.units.findAllLengths(a, 2, { row:[0,0,0,0],col:[0,0,0] })).to.deep.equal([]);
+      expect(auto.units.findAllLengths(a, 2, { row:[0,2,2,0],col:[2,2,0] })).to.deep.equal([
+        {r:1,c:0,l:2,d:true}, {r:1,c:0,l:2,d:false},
+      ]);
+      expect(auto.units.findAllLengths(a, 3, { row:[3,3,1,0],col:[3,1,1] })).to.deep.equal([
+        {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
+        {r:0,c:0,l:3,d:false},
+      ]);
     });
 
     it('recursiveSolve', function() {
