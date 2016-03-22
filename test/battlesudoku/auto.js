@@ -52,7 +52,7 @@ describe('auto', function() {
     it('init', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
-        'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths',
+        'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAvailableLengths',
         'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
       ]);
     });
@@ -205,24 +205,23 @@ describe('auto', function() {
     it('findAllLengths', function() {
       var a = auto.units.availableBoard(4, 3);
       a[3][2] = 'fill';
-      expect(auto.units.findAllLengths(a)).to.deep.equal([{r:0,c:0,l:4,d:false}]);
-      expect(auto.units.findAllLengths(a, 3)).to.deep.equal([
+      expect(auto.units.findAllLengths(a, true)).to.deep.equal([
         {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
-        {r:0,c:0,l:3,d:false}, {r:1,c:0,l:3,d:false},
       ]);
-      expect(auto.units.findAllLengths(a, 2).length).to.equal(9);
-      // 311 9
-      // ---+
-      // 000|2
-      // 000|2
-      // 000|0
-      // 001|0
+      expect(auto.units.findAllLengths(a, false)).to.deep.equal([
+        {r:0,c:0,l:4,d:false},
+      ]);
+    });
 
-      expect(auto.units.findAllLengths(a, 2, { row:[0,0,0,0],col:[0,0,0] })).to.deep.equal([]);
-      expect(auto.units.findAllLengths(a, 2, { row:[0,2,2,0],col:[2,2,0] })).to.deep.equal([
+    it('findAvailableLengths', function() {
+      var a = auto.units.availableBoard(4, 3);
+      a[3][2] = 'fill';
+
+      expect(auto.units.findAvailableLengths(a, 2, { row:[0,0,0,0],col:[0,0,0] })).to.deep.equal([]);
+      expect(auto.units.findAvailableLengths(a, 2, { row:[0,2,2,0],col:[2,2,0] })).to.deep.equal([
         {r:1,c:0,l:2,d:true}, {r:1,c:0,l:2,d:false},
       ]);
-      expect(auto.units.findAllLengths(a, 3, { row:[3,3,1,0],col:[3,1,1] })).to.deep.equal([
+      expect(auto.units.findAvailableLengths(a, 3, { row:[3,3,1,0],col:[3,1,1] })).to.deep.equal([
         {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
         {r:0,c:0,l:3,d:false},
       ]);
