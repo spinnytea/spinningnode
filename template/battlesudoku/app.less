@@ -1,9 +1,12 @@
 @import '../palette/light-blue';
 
 /* TODO interchangable themes; mint */
+/* TODO fix the stylesheet ~ lime has a bad backgrounds; do I change  */
+@mainBackground: #FFFFFF;
+
 
 body {
-    background-color: @textPrimaryColor;
+    background-color: @mainBackground;
 }
 
 #BattleSudoku {
@@ -18,7 +21,7 @@ body {
 }
 #BattleSudoku .btn-default {
     color: @primaryTextColor;
-    background-color: @textPrimaryColor;
+    background-color: @mainBackground;
     border-color: @dividerColor;
 }
 #BattleSudoku .btn-primary {
