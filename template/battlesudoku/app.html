@@ -17,13 +17,12 @@
     </div>
     <p class="form-inline">
         <button class="btn btn-default" ng-click="reset()" title="Reset"><i class="fa fa-fw fa-undo"></i></button>
-        <input class="form-control" type="number" ng-model="boardSize" />
+        <input class="form-control" type="number" ng-model="boardSize" min="1" />
         <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()" title="New Game"><i class="fa fa-fw fa-dot-circle-o"></i></button>
         <button class="btn btn-default" ng-click="solveBoard()" ng-disabled="win" title="Auto Solve"><i class="fa fa-fw fa-bolt"></i></button>
     </p>
 
     <div class="jumbotron" ng-show="win">
         <h1>&#x1F389; You Did It! &#x1F38A;</h1>
-        <p><span ng-bind="counts.win"></span> to <span ng-bind="counts.auto"></span> out of <span ng-bind="counts.new"></span></p>
     </div>
 </div>
