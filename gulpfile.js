@@ -40,7 +40,7 @@ gulp.task('build-css', [], function() {
     .on('error', function() { gutil.log(arguments); this.emit('end'); })
     .pipe(minifyCSS())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/template'));
+    .pipe(gulp.dest('dist'));
 });
 gulp.task('build-html', [], function() {
   return gulp.src(html)
