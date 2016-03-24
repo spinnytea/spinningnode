@@ -73,7 +73,7 @@ gulp.task('buildd', [], function() {
   gulp.start('build');
 });
 gulp.task('release', ['build'], function() {
-  return gulp.src(['dist/**/*', '!dist/'+zipName])
+  return gulp.src(['dist/**/*', '!dist/'+zipName, '!dist/**/*.map'])
     .pipe(zip(zipName))
     .pipe(gulp.dest('dist'));
 });
