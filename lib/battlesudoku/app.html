@@ -12,9 +12,10 @@
         </tr>
     </table>
 
-    <div class="lengths">
+    <p class="lengths">
         <span ng-repeat="l in board.len" ng-bind="l.size" class="badge" ng-class="{'done':(l.done),'over':(l.over)}"></span>
-    </div>
+    </p>
+
     <p class="form-inline">
         <button class="btn btn-default" ng-click="reset()" title="Reset"><i class="fa fa-fw fa-undo"></i></button>
         <input class="form-control" type="number" ng-model="boardSize" min="1" />
