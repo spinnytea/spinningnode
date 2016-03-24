@@ -72,7 +72,7 @@ gulp.task('buildd', [], function() {
   gulp.watch(resource, ['build-resource']);
   gulp.start('build');
 });
-gulp.task('release', ['build'], function() {
+gulp.task('release', ['build', 'mocha'], function() {
   return gulp.src(['dist/**/*', '!dist/'+zipName, '!dist/**/*.map'])
     .pipe(zip(zipName))
     .pipe(gulp.dest('dist'));
