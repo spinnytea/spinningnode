@@ -12,9 +12,11 @@ var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
+var zip = require('gulp-zip');
 
 var entryPoint = './index.js';
 var outputName = 'spinningnode.js';
+var zipName = 'spinningnode.zip';
 
 var js = [ entryPoint, 'lib/**/*.js' ];
 var html = [ 'lib/**/*.html' ];
@@ -69,6 +71,11 @@ gulp.task('buildd', [], function() {
   gulp.watch(css, ['build-css']);
   gulp.watch(resource, ['build-resource']);
   gulp.start('build');
+});
+gulp.task('release', ['build'], function() {
+  return gulp.src(['dist/**/*', '!dist/'+zipName])
+    .pipe(zip(zipName))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('mocha', ['lint'], function() {
