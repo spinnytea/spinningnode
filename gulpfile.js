@@ -10,6 +10,7 @@ var minifyCSS = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
+var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
 
 var entryPoint = './index.js';
@@ -41,15 +42,26 @@ gulp.task('build-less', [], function() {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/template'));
 });
+gulp.task('build-html', [], function() {
+  gulp.src('index.html')
+    .pipe(gulp.dest('dist'));
+
+  gulp.src('template/**/*.png')
+    .pipe(gulp.dest('dist/template'));
+
+  return gulp.src('template/**/*.html')
+    .pipe(templateCache({
+      standalone: true,
+      root: 'template',
+    }))
+    .pipe(gulp.dest('dist'));
+});
 gulp.task('build-js', ['lint'], function () {
   // set up the browserify instance on a task basis
   var b = browserify({
     entries: entryPoint,
     debug: true
   });
-
-  gulp.src('index.html')
-    .pipe(gulp.dest('dist'));
 
   return b.bundle()
     .pipe(source(outputName))
@@ -61,7 +73,7 @@ gulp.task('build-js', ['lint'], function () {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
 });
-gulp.task('build', ['build-js', 'build-less'], function() {});
+gulp.task('build', ['build-js', 'build-html', 'build-less'], function() {});
 gulp.task('buildd', [], function() {
   gulp.watch(resource, ['build']);
   gulp.start('build');

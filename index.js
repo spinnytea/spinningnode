@@ -3,6 +3,7 @@ angular.module('spinningnode', [
   require('./lib/maze/mazeModule').name,
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
+  'templates',
   'ngRoute'
 ])
 .config(['$routeProvider', function($routeProvider) {
