@@ -9,15 +9,15 @@ angular.module('spinningnode', [
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/mazes', {
     controller: 'spinningnode.mazes.appController',
-    templateUrl: 'template/maze/app.html'
+    templateUrl: 'maze/app.html'
   }).when('/datadiff', {
     controller: 'spinningnode.utils.diff.controller',
-    templateUrl: 'template/utils/datadiff.html'
+    templateUrl: 'utils/datadiff.html'
   }).when('/bs', {
       controller: 'spinningnode.battlesudoku.app.controller',
-      templateUrl: 'template/battlesudoku/app.html'
+      templateUrl: 'battlesudoku/app.html'
   }).otherwise({
-    templateUrl: 'template/menu.html'
+    templateUrl: 'menu.html'
   });
 }])
 .factory('$exceptionHandler', function() {

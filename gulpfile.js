@@ -32,7 +32,7 @@ gulp.task('lint', [], function () {
 });
 
 gulp.task('build-less', [], function() {
-  return gulp.src(['template/**/*.less', '!template/palette/*.less'])
+  return gulp.src(['lib/**/*.less'])
     .pipe(sourcemaps.init())
     .pipe(less({
       paths: [ 'template/palette' ]
@@ -46,13 +46,12 @@ gulp.task('build-html', [], function() {
   gulp.src('index.html')
     .pipe(gulp.dest('dist'));
 
-  gulp.src('template/**/*.png')
+  gulp.src('lib/**/*.png')
     .pipe(gulp.dest('dist/template'));
 
-  return gulp.src('template/**/*.html')
+  return gulp.src('lib/**/*.html')
     .pipe(templateCache({
       standalone: true,
-      root: 'template',
     }))
     .pipe(gulp.dest('dist'));
 });
