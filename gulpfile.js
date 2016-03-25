@@ -23,30 +23,6 @@ var html = [ 'lib/**/*.html' ];
 var css = [ 'lib/**/*.less', '!lib/palette/*.less' ];
 var resource = [ 'index.html', 'lib/**/*.png' ];
 
-gulp.task('lint', [], function () {
-  return gulp.src(js).pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('build-resource', [], function() {
-  return gulp.src(resource)
-    .pipe(gulp.dest('dist'));
-});
-gulp.task('build-css', [], function() {
-  return gulp.src(css)
-    .pipe(sourcemaps.init())
-    .pipe(less())
-    .on('error', function() { gutil.log(arguments); this.emit('end'); })
-    .pipe(minifyCSS())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'));
-});
-gulp.task('build-html', [], function() {
-  return gulp.src(html)
-    .pipe(templateCache({ standalone: true }))
-    .pipe(gulp.dest('dist'));
-});
 gulp.task('build-js', ['lint'], function () {
   // set up the browserify instance on a task basis
   var b = browserify({
@@ -64,6 +40,33 @@ gulp.task('build-js', ['lint'], function () {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
 });
+gulp.task('lint', [], function () {
+  return gulp.src(js).pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('build-html', [], function() {
+  return gulp.src(html)
+    .pipe(templateCache({ standalone: true }))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build-css', [], function() {
+  return gulp.src(css)
+    .pipe(sourcemaps.init())
+    .pipe(less())
+    .on('error', function() { gutil.log(arguments); this.emit('end'); })
+    .pipe(minifyCSS())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build-resource', [], function() {
+  return gulp.src(resource)
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('build', ['build-js', 'build-html', 'build-css', 'build-resource'], function() {});
 gulp.task('buildd', [], function() {
   gulp.watch(js, ['build-js']);
