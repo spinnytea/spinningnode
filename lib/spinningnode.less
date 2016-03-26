@@ -30,6 +30,20 @@ img.chromoji {
   line-height: @scale;
 }
 
+.fa-spin-hover:hover {
+  -webkit-animation: fa-spin 2s infinite linear; /* iOS Safari */
+  -moz-animation: fa-spin 2s infinite linear;    /* Firefox */
+  -o-animation: fa-spin 2s infinite linear;      /* Opera */
+  animation: fa-spin 2s infinite linear;         /* non-prefixed version */
+}
+
+.fa-gear.fa-spin-once-hover:hover {
+  -webkit-animation: fa-spin 2s 0.25 linear; /* iOS Safari */
+  -moz-animation: fa-spin 2s 0.25 linear;    /* Firefox */
+  -o-animation: fa-spin 2s 0.25 linear;      /* Opera */
+  animation: fa-spin 2s 0.25 linear;         /* non-prefixed version */
+}
+
 .menu-right {
   position: absolute;
   top: 15px;
