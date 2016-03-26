@@ -4,6 +4,13 @@ var expect = require('chai').expect;
 var auto = require('../../lib/battlesudoku/auto');
 var board = require('../../lib/battlesudoku/board');
 
+function invalid_resolve() {
+  throw new Error('this test should fail');
+}
+function invalid_reject() {
+  throw new Error('this test should succeed');
+}
+
 describe('auto', function() {
   it('init', function() {
     expect(Object.keys(auto)).to.deep.equal(['generate', 'solve']);
@@ -29,7 +36,7 @@ describe('auto', function() {
 
   // init board with one solution
   // solve, check result
-  it('solve', function() {
+  it('solve', function(done) {
     var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
 
     expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
@@ -38,14 +45,14 @@ describe('auto', function() {
       ['none', 'none', 'none'],
     ]);
 
-    auto.solve(b);
-
-    expect(board.checkWin(b)).to.equal(true);
-    expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
-      ['empty', 'empty', 'fill'],
-      ['fill', 'empty', 'fill'],
-      ['empty', 'empty', 'fill'],
-    ]);
+    auto.solve(b, Promise).then(function() {
+      expect(board.checkWin(b)).to.equal(true);
+      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+        ['empty', 'empty', 'fill'],
+        ['fill', 'empty', 'fill'],
+        ['empty', 'empty', 'fill'],
+      ]);
+    }, invalid_reject).then(done, done);
   });
 
   describe('units', function() {
@@ -227,13 +234,41 @@ describe('auto', function() {
       ]);
     });
 
-    it('recursiveSolve', function() {
-      expect(auto.units.recursiveSolve([['fill']], [], {row:[0],col:[0]})).to.deep.equal([['fill']]);
-      expect(auto.units.recursiveSolve([['none']], [1], {row:[1],col:[1]})).to.deep.equal([['fill']]);
-      expect(auto.units.recursiveSolve([['none', 'none']], [2], {row:[2],col:[1, 1]})).to.deep.equal([['fill', 'fill']]);
-    });
+    describe('recursiveSolve', function() {
+      it('nothing to do', function(done) {
+        auto.units.recursiveSolve([['fill']], [], {row:[0],col:[0]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([['fill']]);
+        }, invalid_reject).then(done, done);
+      });
 
-    it.skip('verify recursive copy/no copy');
+      it('nowhere to place piece', function(done) {
+        auto.units.recursiveSolve([['none']], [1], {row:[0],col:[0]}, Promise)
+          .then(invalid_resolve)
+          .then(done, done);
+      });
+
+      it('marked empty', function(done) {
+        auto.units.recursiveSolve([['empty']], [1], {row:[1],col:[1]}, Promise)
+          .then(invalid_resolve)
+          .then(done, done);
+      });
+
+      it('only one', function(done) {
+        auto.units.recursiveSolve([['none']], [1], {row:[1],col:[1]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([['fill']]);
+        }, invalid_reject).then(done, done);
+      });
+
+      it('simple', function(done) {
+        auto.units.recursiveSolve([['none', 'none']], [2], {row:[2],col:[1, 1]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([['fill', 'fill']]);
+        }, invalid_reject).then(done, done);
+      });
+
+      it.skip('verify recursive copy/no copy');
+
+      it.skip('complicated');
+    }); // end recursiveSolve
 
     it('updateRecursiveCounts', function() {
       expect(auto.units.updateRecursiveCounts({ row: [1, 2, 1], col: [1, 0, 3] }, {r:1,c:0,l:1,d:true}))
