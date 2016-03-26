@@ -242,8 +242,12 @@ describe('auto', function() {
       });
 
       it('nowhere to place piece', function(done) {
-        auto.units.recursiveSolve([['none']], [1], {row:[0],col:[0]}, Promise)
-          .then(invalid_resolve)
+        var count = 0;
+        function notify() { count++; }
+        auto.units.recursiveSolve([['none', 'none']], [1], {row:[0],col:[0]}, Promise, notify)
+          .then(invalid_resolve, function() {
+            expect(count).to.equal(1);
+          })
           .then(done, done);
       });
 
@@ -268,6 +272,15 @@ describe('auto', function() {
       it.skip('verify recursive copy/no copy');
 
       it.skip('complicated');
+
+      it.skip('optimized failure', function() {
+        // an unintelligent solver will fail after 7680 attempts
+        var b = board.initBoard([3, 1, 3, 1, 2], [3, 0, 4, 0, 3], [4, 1, 1, 1, 1, 1, 1]);
+        var a = auto.units.availableBoard(b);
+        auto.units.doPlace(a, 1, 2, 4, false);
+
+        console.log(a);
+      });
     }); // end recursiveSolve
 
     it('updateRecursiveCounts', function() {
@@ -279,10 +292,16 @@ describe('auto', function() {
 
     it('updateBoard', function() {
       var b = board.initBoard([1, 0], [1, 0], [1]);
-      auto.units.updateBoard([['fill', 'none'], ['none', 'none']], b);
+      auto.units.updateBoard([['fill', 'none'], ['empty', 'none']], b, true);
       expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
         ['fill', 'empty'],
         ['empty', 'empty'],
+      ]);
+
+      auto.units.updateBoard([['fill', 'none'], ['empty', 'none']], b);
+      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+        ['fill', 'none'],
+        ['empty', 'none'],
       ]);
     });
   }); // end units
