@@ -8,6 +8,7 @@ function invalid_resolve() {
   throw new Error('this test should fail');
 }
 function invalid_reject() {
+  if(_.isError(arguments[0])) throw arguments[0];
   throw new Error('this test should succeed');
 }
 
@@ -253,7 +254,9 @@ describe('auto', function() {
 
       it('marked empty', function(done) {
         auto.units.recursiveSolve([['empty']], [1], {row:[1],col:[1]}, Promise)
-          .then(invalid_resolve)
+          .then(invalid_resolve, function(errL) {
+            expect(errL).to.equal(1);
+          })
           .then(done, done);
       });
 
@@ -299,9 +302,7 @@ describe('auto', function() {
 
   describe('integration', function() {
     describe('solve', function() {
-      it.skip('optimized failure', function(done) {
-        this.timeout(200); // FIXME remove once this goes faster
-
+      it('optimized failure', function(done) {
         // an unintelligent solver will fail after 7680 attempts
         var b = board.initBoard([3, 1, 3, 1, 2], [3, 0, 4, 0, 3], [4, 1, 1, 1, 1, 1, 1]);
         b[1][2].state = 'fill';
@@ -313,8 +314,14 @@ describe('auto', function() {
         var count = 0;
         function notify() { count++; }
         auto.solve(b, Promise, notify).then(invalid_resolve, function() {
-          expect(count).to.equal(7680); // XXX this has been proven, but it times out first
-        }).then(done, done);
+          // check the async path
+          // verify our steps
+          expect(count).to.equal(12);
+        }).then(function() {
+          // check the inline path
+          // this this will timeout if not optimized
+          return auto.solve(b, Promise);
+        }, invalid_reject).then(invalid_resolve, done);
       });
     }); // end solve
   }); // end integration
