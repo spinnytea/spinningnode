@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 module.exports = angular.module('spinningnode', [
-  require('./lib/maze/mazeModule').name,
+  require('./lib/maze').name,
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
   'templates',
@@ -31,15 +31,6 @@ module.exports.factory('$exceptionHandler', function() {
     throw exception;
   };
 });
-/* @deprecate */
-module.exports.controller('RootCtrl', [
-  '$scope',
-  function($scope) {
-    $scope.rootKeyDown = function($event) {
-      $scope.$broadcast('keydown', $event);
-    };
-  }
-]);
 module.exports.factory('bindKeys', ['$hotkey', function($hotkey) {
   return function($scope, keys) {
     _.forEach(keys, function(fn, key) { $hotkey.bind(key, fn); });
