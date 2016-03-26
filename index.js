@@ -4,6 +4,7 @@ angular.module('spinningnode', [
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
   'templates',
+  'drahak.hotkeys',
   'ngRoute'
 ])
 .config(['$routeProvider', function($routeProvider) {
