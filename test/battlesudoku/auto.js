@@ -272,15 +272,6 @@ describe('auto', function() {
       it.skip('verify recursive copy/no copy');
 
       it.skip('complicated');
-
-      it.skip('optimized failure', function() {
-        // an unintelligent solver will fail after 7680 attempts
-        var b = board.initBoard([3, 1, 3, 1, 2], [3, 0, 4, 0, 3], [4, 1, 1, 1, 1, 1, 1]);
-        var a = auto.units.availableBoard(b);
-        auto.units.doPlace(a, 1, 2, 4, false);
-
-        console.log(a);
-      });
     }); // end recursiveSolve
 
     it('updateRecursiveCounts', function() {
@@ -305,4 +296,26 @@ describe('auto', function() {
       ]);
     });
   }); // end units
+
+  describe('integration', function() {
+    describe('solve', function() {
+      it.skip('optimized failure', function(done) {
+        this.timeout(200); // FIXME remove once this goes faster
+
+        // an unintelligent solver will fail after 7680 attempts
+        var b = board.initBoard([3, 1, 3, 1, 2], [3, 0, 4, 0, 3], [4, 1, 1, 1, 1, 1, 1]);
+        b[1][2].state = 'fill';
+        b[2][2].state = 'fill';
+        b[3][2].state = 'fill';
+        b[4][2].state = 'fill';
+        board.checkWin(b);
+
+        var count = 0;
+        function notify() { count++; }
+        auto.solve(b, Promise, notify).then(invalid_resolve, function() {
+          expect(count).to.equal(7680); // XXX this has been proven, but it times out first
+        }).then(done, done);
+      });
+    }); // end solve
+  }); // end integration
 }); // end auto
