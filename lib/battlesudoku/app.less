@@ -1,10 +1,34 @@
-/* TODO interchangable themes; mint */
-@import '../palette/pink';
+#BattleSudoku.light-blue {
+  @import "../palette/light-blue";
+  .setup-overrides;
+  .setup-app;
+}
+#BattleSudoku.teal {
+  @import "../palette/teal";
+  .setup-overrides;
+  .setup-app;
+}
+#BattleSudoku.pink {
+  @import "../palette/pink";
+  .setup-overrides;
+  .setup-app;
+}
+#BattleSudoku.red {
+  @import "../palette/red";
+  .setup-overrides;
+  .setup-app;
+}
+#BattleSudoku.deep-purple {
+  @import "../palette/deep-purple";
+  .setup-overrides;
+  .setup-app;
+}
+
 
 @mainBackground: #FFFFFF;
 
 // general bootstrap override (for the game)
-#BattleSudoku {
+.setup-overrides() {
   text-align: center;
   h1 {
     color: @primaryTextColor;
@@ -12,9 +36,6 @@
   .jumbotron {
     background-color: @mainBackground;
     border: 2px solid @primaryColor;
-  }
-  input[type="number"] {
-    width: 4em;
   }
   .form-control {
     border-color: @dividerColor;
@@ -33,7 +54,7 @@
 }
 
 // game specific
-#BattleSudoku {
+.setup-app() {
   .board {
     margin: auto;
     position: relative;
@@ -45,12 +66,9 @@
       vertical-align: middle;
       width: 2em;
       height: 2em;
-    }
-    th.done {
-      color: @primaryColor;
-    }
-    th.done {
-      color: @accentColor;
+
+      &.done { color: @primaryColor; }
+      &.over { color: @accentColor; }
     }
 
     td {
@@ -59,20 +77,21 @@
       height: 2em;
     }
     td.none {
-      background: @mainBackground;
+      background-color: @mainBackground;
     }
     td.none:hover {
-      background: @primaryColor;
+      //background-color: mix(@primaryColor, white, 20%);
+      background-color: @primaryColor;
       opacity: 0.2;
     }
     td.empty {
-      background: @dividerColor;
+      background-color: @dividerColor;
     }
     td.fill {
-      background: @primaryColor;
+      background-color: @primaryColor;
     }
     td.fill.invalid {
-      background: @accentColor;
+      background-color: @accentColor;
     }
     td:not(.none):hover {
       opacity: 0.8;
@@ -82,14 +101,14 @@
   .lengths {
     span {
       color: @textPrimaryColor;
-      background: @secondaryTextColor;
+      background-color: @secondaryTextColor;
       margin: 0.5em;
     }
     span.done {
-      background: @primaryColor;
+      background-color: @primaryColor;
     }
     span.over {
-      background: @accentColor;
+      background-color: @accentColor;
     }
   }
 }
