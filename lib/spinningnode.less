@@ -1,38 +1,50 @@
+@scale: 1.42857143em;
+
 body {
-    background-color: white;
+  background-color: white;
 }
 
 h1, h2, h3, h3, h4, h5, h6 {
-    font-weight: lighter;
+  font-weight: lighter;
 }
 
 .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* IE/Edge */
-    user-select: none;           /* non-prefixed version, currently not supported by any browser */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently not supported by any browser */
 }
 
 img.chromoji {
-    margin-top: -0.7em !important;
+  margin-top: -0.7em !important;
 }
 
 .form-inline input.form-control[type="number"] {
-    display: inline;
-    width: 4em;
+  display: inline;
+  width: 4em;
 }
 
 .btn .fa {
-    line-height: 1.42857143em;
+  line-height: @scale;
+}
+
+.menu-right {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: @scale;
+}
+.menu-right a {
+  color: black;
 }
 
 table.maze {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 table.maze td {
-    width: 20px;
-    height: 20px;
-    border: 0 solid darkslategray;
+  width: 20px;
+  height: 20px;
+  border: 0 solid darkslategray;
 }

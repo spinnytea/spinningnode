@@ -1,4 +1,8 @@
-<div id="BattleSudoku" class="light-blue">
+<div id="BattleSudoku" ng-class="theme">
+    <span class="menu-right">
+        <a href="#/bs/settings" title="Settings"><i class="fa fa-gear"></i></a>
+    </span>
+
     <h1>Battle Sudoku</h1>
 
     <table class="board noselect" ng-mouseup="markEnd()" ng-mouseleave="markEnd()">
