@@ -1,13 +1,14 @@
 'use strict';
-angular.module('spinningnode', [
+var _ = require('lodash');
+module.exports = angular.module('spinningnode', [
   require('./lib/maze/mazeModule').name,
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
   'templates',
   'drahak.hotkeys',
   'ngRoute'
-])
-.config(['$routeProvider', function($routeProvider) {
+]);
+module.exports.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/mazes', {
     controller: 'spinningnode.mazes.appController',
     templateUrl: 'maze/app.html'
@@ -23,14 +24,15 @@ angular.module('spinningnode', [
   }).otherwise({
     templateUrl: 'menu.html'
   });
-}])
-.factory('$exceptionHandler', function() {
+}]);
+module.exports.factory('$exceptionHandler', function() {
   return function(exception, cause) {
     if(cause) { exception.message += ' (caused by "' + cause + '")'; }
     throw exception;
   };
-})
-.controller('RootCtrl', [
+});
+/* @deprecate */
+module.exports.controller('RootCtrl', [
   '$scope',
   function($scope) {
     $scope.rootKeyDown = function($event) {
@@ -38,3 +40,11 @@ angular.module('spinningnode', [
     };
   }
 ]);
+module.exports.factory('bindKeys', ['$hotkey', function($hotkey) {
+  return function($scope, keys) {
+    _.forEach(keys, function(fn, key) { $hotkey.bind(key, fn); });
+    $scope.$on('$destroy', function() {
+      _.forEach(keys, function(fn, key) { $hotkey.unbind(key, fn); });
+    });
+  };
+}]);
