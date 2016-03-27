@@ -60,8 +60,9 @@ describe('auto', function() {
     it('init', function() {
       expect(Object.keys(auto.units)).to.deep.equal([
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
-        'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAvailableLengths',
+        'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAllLengthsForL',
         'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
+        'findRowMust', 'findColMust', 'findAllMust',
       ]);
     });
 
@@ -221,15 +222,15 @@ describe('auto', function() {
       ]);
     });
 
-    it('findAvailableLengths', function() {
+    it('findAllLengthsForL', function() {
       var a = auto.units.availableBoard(4, 3);
       a[3][2] = 'fill';
 
-      expect(auto.units.findAvailableLengths(a, 2, { row:[0,0,0,0],col:[0,0,0] })).to.deep.equal([]);
-      expect(auto.units.findAvailableLengths(a, 2, { row:[0,2,2,0],col:[2,2,0] })).to.deep.equal([
+      expect(auto.units.findAllLengthsForL(a, 2, { row:[0,0,0,0],col:[0,0,0] })).to.deep.equal([]);
+      expect(auto.units.findAllLengthsForL(a, 2, { row:[0,2,2,0],col:[2,2,0] })).to.deep.equal([
         {r:1,c:0,l:2,d:true}, {r:1,c:0,l:2,d:false},
       ]);
-      expect(auto.units.findAvailableLengths(a, 3, { row:[3,3,1,0],col:[3,1,1] })).to.deep.equal([
+      expect(auto.units.findAllLengthsForL(a, 3, { row:[3,3,1,0],col:[3,1,1] })).to.deep.equal([
         {r:0,c:0,l:3,d:true}, {r:1,c:0,l:3,d:true},
         {r:0,c:0,l:3,d:false},
       ]);
@@ -296,6 +297,44 @@ describe('auto', function() {
       expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
         ['fill', 'none'],
         ['empty', 'none'],
+      ]);
+    });
+
+    it('findRowMust', function() {
+      expect(auto.units.findRowMust([['none']], 0))
+        .to.deep.equal([]);
+      expect(auto.units.findRowMust([['must', 'none', 'must', 'must']], 0))
+        .to.deep.equal([{r:0,c:0,l:1,d:true},{r:0,c:2,l:2,d:true}]);
+      expect(auto.units.findRowMust([['none', 'none', 'none', 'none'],['none', 'must', 'must', 'none'],['none', 'none', 'none', 'none']], 1))
+        .to.deep.equal([{r:1,c:1,l:2,d:true}]);
+      expect(auto.units.findRowMust([['must'],['must']], 0))
+        .to.deep.equal([]);
+      expect(auto.units.findRowMust([['must'],['must']], 1))
+        .to.deep.equal([]);
+    });
+
+    it('findColMust', function() {
+      expect(auto.units.findColMust([['none']], 0))
+        .to.deep.equal([]);
+      expect(auto.units.findColMust([['must'],['none'],['must'],['must']], 0))
+        .to.deep.equal([{r:0,c:0,l:1,d:false},{r:2,c:0,l:2,d:false}]);
+      expect(auto.units.findColMust([['none','none','none'],['none','must','none'],['none','must','none'],['none','none','none']], 1))
+        .to.deep.equal([{r:1,c:1,l:2,d:false}]);
+      expect(auto.units.findColMust([['must','must']], 0))
+        .to.deep.equal([]);
+      expect(auto.units.findColMust([['must','must']], 1))
+        .to.deep.equal([]);
+    });
+
+    it('findAllMust', function() {
+      expect(auto.units.findAllMust([
+        ['must', 'must', 'must', 'must'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['must', 'none', 'none', 'none']
+      ])).to.deep.equal([
+        {r:0,c:0,l:4,d:true},{r:2,c:2,l:1,d:true},
+        {r:2,c:0,l:2,d:false},{r:2,c:2,l:1,d:false},
       ]);
     });
   }); // end units
