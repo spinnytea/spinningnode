@@ -62,7 +62,7 @@ describe('auto', function() {
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAllLengthsForL',
         'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
-        'findRowMust', 'findColMust', 'findAllMust',
+        'findRowMust', 'findColMust', 'findAllMust', 'findMustPossibilities',
       ]);
     });
 
@@ -146,9 +146,20 @@ describe('auto', function() {
       expect(auto.units.canPlace(a, 0, 1, 3, false)).to.equal(false);
       expect(auto.units.canPlace(a, 0, 2, 2, false)).to.equal(true);
 
+      a[1][1] = 'must';
+
+      expect(auto.units.canPlace(a, 0, 0, 4, true)).to.equal(false);
+      expect(auto.units.canPlace(a, 1, 0, 4, true)).to.equal(true);
+      expect(auto.units.canPlace(a, 1, 0, 1, true)).to.equal(false);
+      expect(auto.units.canPlace(a, 2, 0, 2, true)).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 0, 3, false)).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 1, 3, false)).to.equal(true);
+      expect(auto.units.canPlace(a, 0, 1, 1, false)).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 2, 2, false)).to.equal(false);
+
       expect(a).to.deep.equal([
         ['none', 'none', 'none', 'none'],
-        ['none', 'empty', 'none', 'none'],
+        ['none', 'must', 'none', 'none'],
         ['none', 'none', 'none', 'none'],
         ['none', 'none', 'none', 'fill']
       ]);
@@ -328,13 +339,65 @@ describe('auto', function() {
 
     it('findAllMust', function() {
       expect(auto.units.findAllMust([
-        ['must', 'must', 'must', 'must'],
+        ['must', 'must', 'must', 'none'],
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
-        ['must', 'none', 'none', 'none']
+        ['none', 'none', 'none', 'none']
       ])).to.deep.equal([
-        {r:0,c:0,l:4,d:true},{r:2,c:2,l:1,d:true},
-        {r:2,c:0,l:2,d:false},{r:2,c:2,l:1,d:false},
+        {r:0,c:0,l:3,d:true},{r:2,c:0,l:1,d:true},{r:2,c:2,l:1,d:true},
+        {r:2,c:0,l:1,d:false},{r:2,c:2,l:1,d:false},
+      ]);
+    });
+
+    it('findMustPossibilities', function() {
+      expect(auto.units.findMustPossibilities([['none','must','none']], {r:0,c:1,l:1,d:true}, [2]))
+        .to.deep.equal([{r:0,c:1,l:2,d:true},{r:0,c:0,l:2,d:true}]);
+      expect(auto.units.findMustPossibilities([['none'],['must'],['none']], {r:1,c:0,l:1,d:false}, [2]))
+        .to.deep.equal([{r:1,c:0,l:2,d:false},{r:0,c:0,l:2,d:false}]);
+
+      expect(auto.units.findMustPossibilities([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], {r:0,c:0,l:3,d:true}, [4, 2, 1])).to.deep.equal([
+        {r:0,c:0,l:4,d:true}
+      ]);
+
+      expect(auto.units.findMustPossibilities([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], {r:2,c:0,l:1,d:true}, [4, 2, 1])).to.deep.equal([
+        {r:2,c:0,l:4,d:true}, {r:2,c:0,l:1,d:true}
+      ]);
+
+      expect(auto.units.findMustPossibilities([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], {r:2,c:2,l:1,d:true}, [4, 2, 1])).to.deep.equal([
+        {r:2,c:0,l:4,d:true}, {r:2,c:2,l:2,d:true}, {r:2,c:2,l:1,d:true}
+      ]);
+
+      expect(auto.units.findMustPossibilities([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], {r:2,c:0,l:1,d:false}, [4, 2, 1])).to.deep.equal([
+        {r:2,c:0,l:2,d:false}, {r:2,c:0,l:1,d:false}
+      ]);
+
+      expect(auto.units.findMustPossibilities([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], {r:2,c:2,l:1,d:false}, [4, 2, 1])).to.deep.equal([
+        {r:2,c:2,l:2,d:false}, {r:2,c:2,l:1,d:false}
       ]);
     });
   }); // end units
