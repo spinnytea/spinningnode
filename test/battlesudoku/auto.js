@@ -169,6 +169,16 @@ describe('auto', function() {
       ]);
     });
 
+    it('canPlace lengths', function() {
+      var a = auto.units.availableBoard(3, 3);
+      expect(auto.units.canPlace(a, 0, 0, 3, true, {row:[3,0,0], col:[1,1,1]})).to.equal(true);
+      expect(auto.units.canPlace(a, 0, 0, 3, true, {row:[3,0,0], col:[1,1,0]})).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 0, 3, true, {row:[2,0,0], col:[1,1,1]})).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 0, 3, false, {row:[1,1,1], col:[3,0,0]})).to.equal(true);
+      expect(auto.units.canPlace(a, 0, 0, 3, false, {row:[1,1,0], col:[3,0,0]})).to.equal(false);
+      expect(auto.units.canPlace(a, 0, 0, 3, false, {row:[1,1,1], col:[2,0,0]})).to.equal(false);
+    });
+
     it('doPlace', function() {
       var a = auto.units.availableBoard(4, 4);
 
@@ -364,17 +374,20 @@ describe('auto', function() {
     });
 
     it('findMustPossibilities', function() {
-      expect(auto.units.findMustPossibilities([['none','must','none']], {r:0,c:1,l:1,d:true}, [2]))
+      expect(auto.units.findMustPossibilities([['none','must','none']], {r:0,c:1,l:1,d:true}, [2], {row:[2],col:[1,1,1]}))
         .to.deep.equal([{r:0,c:1,l:2,d:true},{r:0,c:0,l:2,d:true}]);
-      expect(auto.units.findMustPossibilities([['none'],['must'],['none']], {r:1,c:0,l:1,d:false}, [2]))
+      expect(auto.units.findMustPossibilities([['none'],['must'],['none']], {r:1,c:0,l:1,d:false}, [2], {row:[1,1,1],col:[2]}))
         .to.deep.equal([{r:1,c:0,l:2,d:false},{r:0,c:0,l:2,d:false}]);
+
+      expect(auto.units.findMustPossibilities([['none', 'none','must','none']], {r:0,c:2,l:1,d:true}, [2], {row:[2],col:[0, 1,1,0]}))
+        .to.deep.equal([{r:0,c:1,l:2,d:true}]);
 
       expect(auto.units.findMustPossibilities([
         ['must', 'must', 'must', 'none'],
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], {r:0,c:0,l:3,d:true}, [4, 2, 1])).to.deep.equal([
+      ], {r:0,c:0,l:3,d:true}, [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
         {r:0,c:0,l:4,d:true}
       ]);
 
@@ -383,8 +396,8 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], {r:2,c:0,l:1,d:true}, [4, 2, 1])).to.deep.equal([
-        {r:2,c:0,l:4,d:true}, {r:2,c:0,l:1,d:true}
+      ], {r:2,c:0,l:1,d:true}, [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
+        {r:2,c:0,l:1,d:true}
       ]);
 
       expect(auto.units.findMustPossibilities([
@@ -392,8 +405,8 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], {r:2,c:2,l:1,d:true}, [4, 2, 1])).to.deep.equal([
-        {r:2,c:0,l:4,d:true}, {r:2,c:2,l:2,d:true}, {r:2,c:2,l:1,d:true}
+      ], {r:2,c:2,l:1,d:true}, [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
+        {r:2,c:2,l:2,d:true}, {r:2,c:2,l:1,d:true}
       ]);
 
       expect(auto.units.findMustPossibilities([
@@ -401,7 +414,7 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], {r:2,c:0,l:1,d:false}, [4, 2, 1])).to.deep.equal([
+      ], {r:2,c:0,l:1,d:false}, [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
         {r:2,c:0,l:2,d:false}, {r:2,c:0,l:1,d:false}
       ]);
 
@@ -410,8 +423,23 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], {r:2,c:2,l:1,d:false}, [4, 2, 1])).to.deep.equal([
+      ], {r:2,c:2,l:1,d:false}, [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
         {r:2,c:2,l:2,d:false}, {r:2,c:2,l:1,d:false}
+      ]);
+
+      expect(auto.units.findMustPossibilities([
+        ['none', 'none', 'none'],
+        ['none', 'none', 'none'],
+        ['none', 'must', 'none'],
+      ], {r:2,c:1,l:1,d:true}, [2, 1], {row:[2,0,1],col:[0,2,1]})).to.deep.equal([
+        {r:2,c:1,l:1,d:true}
+      ]);
+      expect(auto.units.findMustPossibilities([
+        ['none', 'none', 'none'],
+        ['none', 'none', 'none'],
+        ['none', 'must', 'none'],
+      ], {r:2,c:1,l:1,d:false}, [2, 1], {row:[2,0,1],col:[0,2,1]})).to.deep.equal([
+        {r:2,c:1,l:1,d:false}
       ]);
     });
 
@@ -421,7 +449,7 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], [4, 2, 1])).to.deep.equal([
+      ], [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
         {r:0,c:0,l:4,d:true}
       ]);
 
@@ -431,7 +459,7 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['must', 'none', 'must', 'none'],
         ['none', 'none', 'none', 'none']
-      ], dupLengths)).to.deep.equal([
+      ], dupLengths, {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([
         {r:2,c:0,l:1,d:true}, {r:2,c:0,l:2,d:false}, {r:2,c:0,l:1,d:false}
       ]);
 
@@ -440,7 +468,7 @@ describe('auto', function() {
         ['none', 'none', 'none', 'none'],
         ['fill', 'none', 'none', 'none'],
         ['fill', 'none', 'none', 'none']
-      ], [1])).to.deep.equal([]);
+      ], [1], {row:[4,0,2,1],col:[3,1,2,1]})).to.deep.equal([]);
     });
 
     describe('recursiveMust', function() {
@@ -462,7 +490,7 @@ describe('auto', function() {
           ['none', 'none', 'none', 'none'],
           ['must', 'none', 'none', 'none'],
           ['none', 'none', 'none', 'none']
-        ], [4, 2, 1], {row:[4, 0, 2, 1],col:[3, 1, 2, 1]}, Promise).then(function(result) {
+        ], [4, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]}, Promise).then(function(result) {
           expect(result).to.deep.equal([
             ['fill', 'fill', 'fill', 'fill'],
             ['none', 'none', 'none', 'none'],
@@ -480,8 +508,8 @@ describe('auto', function() {
           ['none', 'none', 'none', 'none'],
           ['must', 'none', 'none', 'none'],
           ['none', 'none', 'none', 'none']
-        ], [4, 2, 2, 1], {row:[4, 0, 2, 1],col:[3, 1, 2, 1]}, Promise, notify).then(invalid_resolve, function() {
-          expect(count).to.be.greaterThan(1);
+        ], [4, 2, 2, 1], {row:[4,0,2,1],col:[3,1,2,1]}, Promise, notify).then(invalid_resolve, function() {
+          expect(count).to.equal(3);
         }).then(done, done);
       });
     }); // end recursiveMust
@@ -543,7 +571,7 @@ describe('auto', function() {
       }); // end can handle must
 
 
-      it.skip('found a bug with counts', function(done) {
+      it('found a bug with counts', function(done) {
         var b = board.initBoard([2, 0, 1], [0, 2, 1], [2, 1]);
         b[2][1].state = 'fill';
         board.checkWin(b);
