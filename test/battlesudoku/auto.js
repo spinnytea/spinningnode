@@ -11,6 +11,9 @@ function invalid_reject() {
   if(_.isError(arguments[0])) throw arguments[0];
   throw new Error('this test should succeed');
 }
+function board_state(b) {
+  return b.map(function(r) { return _.map(r, 'state'); })
+}
 
 describe('auto', function() {
   it('init', function() {
@@ -40,7 +43,7 @@ describe('auto', function() {
   it('solve', function(done) {
     var b = board.initBoard([1, 2, 1], [1, 0, 3], [3, 1]);
 
-    expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+    expect(board_state(b)).to.deep.equal([
       ['none', 'none', 'none'],
       ['none', 'none', 'none'],
       ['none', 'none', 'none'],
@@ -48,7 +51,7 @@ describe('auto', function() {
 
     auto.solve(b, Promise).then(function() {
       expect(board.checkWin(b)).to.equal(true);
-      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+      expect(board_state(b)).to.deep.equal([
         ['empty', 'empty', 'fill'],
         ['fill', 'empty', 'fill'],
         ['empty', 'empty', 'fill'],
@@ -87,8 +90,8 @@ describe('auto', function() {
       b[1][2].state = 'fill';
       a = auto.units.availableBoard(b);
       expect(a).to.deep.equal([
-        ['none', 'none', 'fill'],
-        ['none', 'none', 'fill'],
+        ['none', 'none', 'must'],
+        ['none', 'none', 'must'],
         ['none', 'none', 'none'],
       ]);
     });
@@ -300,13 +303,13 @@ describe('auto', function() {
     it('updateBoard', function() {
       var b = board.initBoard([1, 0], [1, 0], [1]);
       auto.units.updateBoard([['fill', 'none'], ['empty', 'none']], b, true);
-      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+      expect(board_state(b)).to.deep.equal([
         ['fill', 'empty'],
         ['empty', 'empty'],
       ]);
 
       auto.units.updateBoard([['fill', 'none'], ['empty', 'none']], b);
-      expect(b.map(function(r) { return _.map(r, 'state'); })).to.deep.equal([
+      expect(board_state(b)).to.deep.equal([
         ['fill', 'none'],
         ['empty', 'none'],
       ]);
@@ -501,11 +504,56 @@ describe('auto', function() {
           // check the async path
           // verify our steps
           expect(count).to.equal(12);
+          // after some improvements, we can do even better
+          // expect(count).to.equal(1);
         }).then(function() {
           // check the inline path
           // this this will timeout if not optimized
           return auto.solve(b, Promise);
         }, invalid_reject).then(invalid_resolve, done);
+      });
+
+      describe('can handle musts', function() {
+        it('A', function(done) {
+          var b = board.initBoard([1, 2, 1], [2, 0, 2], [2, 2]);
+          b[0][0].state = 'fill';
+          b[1][0].state = 'fill';
+          board.checkWin(b);
+          auto.solve(b, Promise).then(function() {
+            expect(board_state(b)).to.deep.equal([
+              ['fill', 'empty', 'empty'],
+              ['fill', 'empty', 'fill'],
+              ['empty', 'empty', 'fill'],
+            ]);
+          }, invalid_reject).then(done, done);
+        });
+
+        it('B', function(done) {
+          var b = board.initBoard([1, 2, 1], [2, 0, 2], [2, 2]);
+          b[0][2].state = 'fill';
+          board.checkWin(b);
+          auto.solve(b, Promise).then(function() {
+            expect(board_state(b)).to.deep.equal([
+              ['empty', 'empty', 'fill'],
+              ['fill', 'empty', 'fill'],
+              ['fill', 'empty', 'empty'],
+            ]);
+          }, invalid_reject).then(done, done);
+        });
+      }); // end can handle must
+
+
+      it.skip('found a bug with counts', function(done) {
+        var b = board.initBoard([2, 0, 1], [0, 2, 1], [2, 1]);
+        b[2][1].state = 'fill';
+        board.checkWin(b);
+        auto.solve(b, Promise).then(function() {
+          expect(board_state(b)).to.deep.equal([
+            ['empty', 'fill', 'fill'],
+            ['empty', 'empty', 'empty'],
+            ['empty', 'fill', 'empty'],
+          ]);
+        }, invalid_reject).then(done, done);
       });
     }); // end solve
   }); // end integration
