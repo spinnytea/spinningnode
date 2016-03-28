@@ -62,7 +62,7 @@ describe('auto', function() {
         'availableBoard', 'getCounts', 'canPlace', 'doPlace',
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAllLengthsForL',
         'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
-        'findRowMust', 'findColMust', 'findAllMust', 'findMustPossibilities',
+        'findRowMust', 'findColMust', 'findAllMust', 'findMustPossibilities', 'pickAMust',
       ]);
     });
 
@@ -347,6 +347,16 @@ describe('auto', function() {
         {r:0,c:0,l:3,d:true},{r:2,c:0,l:1,d:true},{r:2,c:2,l:1,d:true},
         {r:2,c:0,l:1,d:false},{r:2,c:2,l:1,d:false},
       ]);
+
+      expect(auto.units.findAllMust([
+        ['fill', 'fill', 'fill', 'fill'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ])).to.deep.equal([
+        {r:2,c:0,l:1,d:true},{r:2,c:2,l:1,d:true},
+        {r:2,c:0,l:1,d:false},{r:2,c:2,l:1,d:false},
+      ]);
     });
 
     it('findMustPossibilities', function() {
@@ -399,6 +409,34 @@ describe('auto', function() {
       ], {r:2,c:2,l:1,d:false}, [4, 2, 1])).to.deep.equal([
         {r:2,c:2,l:2,d:false}, {r:2,c:2,l:1,d:false}
       ]);
+    });
+
+    it('pickAMust', function() {
+      expect(auto.units.pickAMust([
+        ['must', 'must', 'must', 'none'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], [4, 2, 1])).to.deep.equal([
+        {r:0,c:0,l:4,d:true}
+      ]);
+
+      var dupLengths = [2, 2, 2, 2, 2, 1];
+      expect(auto.units.pickAMust([
+        ['fill', 'fill', 'fill', 'fill'],
+        ['none', 'none', 'none', 'none'],
+        ['must', 'none', 'must', 'none'],
+        ['none', 'none', 'none', 'none']
+      ], dupLengths)).to.deep.equal([
+        {r:2,c:0,l:1,d:true}, {r:2,c:0,l:2,d:false}, {r:2,c:0,l:1,d:false}
+      ]);
+
+      expect(auto.units.pickAMust([
+        ['fill', 'fill', 'fill', 'fill'],
+        ['none', 'none', 'none', 'none'],
+        ['fill', 'none', 'none', 'none'],
+        ['fill', 'none', 'none', 'none']
+      ], [1])).to.deep.equal([]);
     });
   }); // end units
 
