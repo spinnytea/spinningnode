@@ -63,6 +63,7 @@ describe('auto', function() {
         'pickALength', 'findRowLengths', 'findColLengths', 'findAllLengths', 'findAllLengthsForL',
         'recursiveSolve', 'updateRecursiveCounts', 'updateBoard',
         'findRowMust', 'findColMust', 'findAllMust', 'findMustPossibilities', 'pickAMust',
+        'recursiveMust',
       ]);
     });
 
@@ -438,6 +439,49 @@ describe('auto', function() {
         ['fill', 'none', 'none', 'none']
       ], [1])).to.deep.equal([]);
     });
+
+    describe('recursiveMust', function() {
+      it('nothing to do', function(done) {
+        auto.units.recursiveMust([['fill']], [], {row:[0],col:[0]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([['fill']]);
+        }, invalid_reject).then(done, done);
+      });
+
+      it('only one', function(done) {
+        auto.units.recursiveMust([['must']], [1], {row:[1],col:[1]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([['fill']]);
+        }, invalid_reject).then(done, done);
+      });
+
+      it('simple', function(done) {
+        auto.units.recursiveMust([
+          ['must', 'must', 'must', 'none'],
+          ['none', 'none', 'none', 'none'],
+          ['must', 'none', 'none', 'none'],
+          ['none', 'none', 'none', 'none']
+        ], [4, 2, 1], {row:[4, 0, 2, 1],col:[3, 1, 2, 1]}, Promise).then(function(result) {
+          expect(result).to.deep.equal([
+            ['fill', 'fill', 'fill', 'fill'],
+            ['none', 'none', 'none', 'none'],
+            ['fill', 'none', 'fill', 'none'],
+            ['fill', 'none', 'none', 'none']
+          ]);
+        }, invalid_reject).then(done, done);
+      });
+
+      it('impossible', function(done) {
+        var count = 0;
+        function notify() { count++; }
+        auto.units.recursiveMust([
+          ['must', 'must', 'must', 'none'],
+          ['none', 'none', 'none', 'none'],
+          ['must', 'none', 'none', 'none'],
+          ['none', 'none', 'none', 'none']
+        ], [4, 2, 2, 1], {row:[4, 0, 2, 1],col:[3, 1, 2, 1]}, Promise, notify).then(invalid_resolve, function() {
+          expect(count).to.be.greaterThan(1);
+        }).then(done, done);
+      });
+    }); // end recursiveMust
   }); // end units
 
   describe('integration', function() {
