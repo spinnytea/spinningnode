@@ -9,7 +9,9 @@ module.exports = angular.module('spinningnode', [
   'ngRoute'
 ]);
 module.exports.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/mazes', {
+  $routeProvider.when('/', {
+    templateUrl: 'menu.html'
+  }).when('/mazes', {
     controller: 'spinningnode.mazes.appController',
     templateUrl: 'maze/app.html'
   }).when('/datadiff', {
@@ -22,7 +24,7 @@ module.exports.config(['$routeProvider', function($routeProvider) {
     controller: 'spinningnode.battlesudoku.settings.controller',
     templateUrl: 'battlesudoku/settings.html'
   }).otherwise({
-    templateUrl: 'menu.html'
+    templateUrl: 'oops.html'
   });
 }]);
 module.exports.factory('$exceptionHandler', function() {
@@ -37,5 +39,18 @@ module.exports.factory('bindKeys', ['$hotkey', function($hotkey) {
     $scope.$on('$destroy', function() {
       _.forEach(keys, function(fn, key) { $hotkey.unbind(key, fn); });
     });
+  };
+}]);
+module.exports.directive('btn', [function() {
+  return {
+    restrict: 'C',
+    link: function($scope, elem, attr) {
+      if(('title' in attr) && ('ngDisabled' in attr)) {
+        var span = elem.wrap('<span/>').parent();
+        $scope.$on('$destroy', $scope.$watch(function() { return attr.title; }, function(title) {
+          span.attr('title', title);
+        }));
+      }
+    }
   };
 }]);
