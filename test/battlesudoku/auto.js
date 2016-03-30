@@ -25,12 +25,14 @@ describe('auto', function() {
     expect(b.row).to.deep.equal([{count: 0, total: 1}]);
     expect(b.col).to.deep.equal([{count: 0, total: 1}]);
     expect(b.len).to.deep.equal([{size: 1, done: false, over: false}]);
+    expect(b.hints.length).to.equal(1);
     expect(b[0][0]).to.deep.equal({state: 'none'});
 
     b = auto.generate(4, 6);
     expect(b.row.length).to.equal(4);
     expect(b.col.length).to.equal(6);
     expect(b.len.length).to.be.greaterThan(0);
+    expect(b.hints.length).to.equal(3);
     var rowCount = _.sumBy(b.row, 'total');
     var colCount = _.sumBy(b.col, 'total');
     var lenCount = _.sumBy(b.len, 'size');

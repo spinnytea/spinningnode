@@ -4,7 +4,7 @@ var board = require('../../lib/battlesudoku/board');
 
 describe('board', function() {
   it('init', function() {
-    expect(Object.keys(board)).to.deep.equal(['initBoard', 'reset', 'redoCounts', 'checkWin']);
+    expect(Object.keys(board)).to.deep.equal(['initBoard', 'reset', 'hint', 'redoCounts', 'checkWin']);
   });
 
   it('initBoard', function() {
@@ -22,6 +22,17 @@ describe('board', function() {
   });
 
   it.skip('reset');
+
+  it('hint', function() {
+    var b = board.initBoard([1, 0, 1], [1, 0, 1], [1, 1], [{r:1,c:1,state:'empty'},{r:2,c:0,state:'fill'}]);
+    expect(b[1][1].state).to.equal('none');
+    expect(b[2][0].state).to.equal('none');
+
+    board.hint(b);
+
+    expect(b[1][1].state).to.equal('empty');
+    expect(b[2][0].state).to.equal('fill');
+  });
 
   it.skip('redoCounts');
 
