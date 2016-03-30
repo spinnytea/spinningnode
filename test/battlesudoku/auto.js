@@ -108,10 +108,15 @@ describe('auto', function() {
       a[0][0] = 'fill';
       a[0][1] = 'fill';
       a[1][1] = 'fill';
-      c =  auto.units.getCounts(a);
+      c = auto.units.getCounts(a);
 
       expect(c.row).to.deep.equal([2, 1]);
       expect(c.col).to.deep.equal([1, 2, 0]);
+
+      c = auto.units.getCounts(a, 'none');
+
+      expect(c.row).to.deep.equal([1, 2]);
+      expect(c.col).to.deep.equal([1, 0, 2]);
     });
 
     it('canPlace', function() {

@@ -27,11 +27,14 @@ describe('board', function() {
     var b = board.initBoard([1, 0, 1], [1, 0, 1], [1, 1], [{r:1,c:1,state:'empty'},{r:2,c:0,state:'fill'}]);
     expect(b[1][1].state).to.equal('none');
     expect(b[2][0].state).to.equal('none');
-
     board.hint(b);
-
     expect(b[1][1].state).to.equal('empty');
     expect(b[2][0].state).to.equal('fill');
+
+    // shouldn't explode if we don't provide a hint
+    b = board.initBoard([1, 0, 1], [1, 0, 1], [1, 1]);
+    expect(b.hints).to.equal(undefined);
+    board.hint(b);
   });
 
   it.skip('redoCounts');
