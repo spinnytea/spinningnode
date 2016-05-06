@@ -23,7 +23,7 @@
     <p class="form-inline">
         <button class="btn btn-default" ng-click="reset()" title="Reset"><i class="fa fa-fw fa-undo"></i></button>
         <button class="btn btn-default" ng-click="hint()" ng-disabled="win" title="Hint"><i class="fa fa-fw fa-question-circle"></i></button>
-        <button class="btn btn-default" ng-click="solveBoard()" ng-disabled="win" title="Auto Solve"><i class="fa fa-fw fa-bolt"></i></button>
+        <button class="btn" ng-class="win?'btn-default':'btn-primary'" ng-click="solveBoard()" ng-disabled="win" title="Auto Solve"><i class="fa fa-fw fa-bolt"></i></button>
         <button class="btn" ng-class="win?'btn-primary':'btn-default'" ng-click="generateBoard()" title="New Game"><i class="fa fa-fw fa-random"></i></button>
 
         <input class="form-control" type="number" ng-model="boardSize" min="1" />
