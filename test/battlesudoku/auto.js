@@ -540,9 +540,9 @@ describe('auto', function() {
         auto.solve(b, Promise, notify).then(invalid_resolve, function() {
           // check the async path
           // verify our steps
-          expect(count).to.equal(48);
+          // expect(count).to.equal(48);
           // after some improvements, we can do even better
-          // expect(count).to.equal(1);
+          expect(count).to.equal(1); // this is mostly because we notify less often, but that means we draw less often
         }).then(function() {
           // check the inline path
           // this this will timeout if not optimized
