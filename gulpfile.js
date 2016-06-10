@@ -2,11 +2,11 @@
 var _ = require('lodash');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
+var cleanCSS = require('gulp-clean-css');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
@@ -57,7 +57,7 @@ gulp.task('build-css', [], function() {
     .pipe(sourcemaps.init())
     .pipe(less())
     .on('error', function() { gutil.log(arguments); this.emit('end'); })
-    .pipe(minifyCSS())
+    .pipe(cleanCSS())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
 });
