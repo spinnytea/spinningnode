@@ -3,7 +3,7 @@
   src: url(sword_art_online_font_by_darkblackswords-d5nssbp.otf);
 }
 
-#saomenu {
+#sao-menu {
   background-image: url('images/scenery.jpg');
   height: 100%;
   font-family: sword_art_online, "Trebuchet MS", Verdana, sans-serif;
@@ -11,4 +11,35 @@
 
 h1 {
   color: white;
+  text-align: center;
+  font-size: 5em;
+
+  /* TODO this isn't exactly right */
+  /* we probably need an span around the contents and set the border bottom, which I don't realllly like */
+  /* I suppose we could have something like h1>span.underline, that would make sense */
+  /* but this isn't a big deal right now */
+  text-decoration: underline;
+}
+
+//
+
+#main-menu {
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+
+  background-color: rgba(0,0,0, 0.5);
+}
+
+#main-menu > .menu-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+#main-menu > .menu-wrapper > img {
+  display: block;
+  width: 3em;
+  height: 3em;
+  margin-bottom: 0.5em;
 }
