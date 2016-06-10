@@ -21,7 +21,7 @@ var zipName = 'spinningnode.zip';
 var js = [ entryPoint, 'lib/**/*.js' ];
 var html = [ 'lib/**/*.html' ];
 var css = [ 'lib/**/*.less', '!lib/palette/*.less' ];
-var resource = [ 'index.html', 'lib/**/*.png' ];
+var resource = [ 'index.html', 'lib/**/*.png', 'lib/**/*.jpg', 'lib/**/*.otf' ];
 
 gulp.task('build-js', ['lint'], function () {
   // set up the browserify instance on a task basis
