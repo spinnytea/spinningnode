@@ -41,4 +41,17 @@ h1 {
   width: 3em;
   height: 3em;
   margin-bottom: 0.5em;
+
+  position: relative;
+  top: 0;
+  opacity: 1;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+/* The animation code */
+@keyframes example {
+  from { top: -100px; opacity: 0; }
+  to { top: 0; opacity: 1; }
 }
