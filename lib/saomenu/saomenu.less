@@ -48,7 +48,13 @@ h1 {
   animation-name: example;
   animation-duration: 1s;
   animation-timing-function: ease-out;
+  animation-fill-mode: backwards;
 }
+#sao-menu #main-menu > .menu-wrapper > img:nth-child(1){ animation-delay: 1s }
+#sao-menu #main-menu > .menu-wrapper > img:nth-child(2){ animation-delay: .75s }
+#sao-menu #main-menu > .menu-wrapper > img:nth-child(3){ animation-delay: .5s }
+#sao-menu #main-menu > .menu-wrapper > img:nth-child(4){ animation-delay: .25s }
+#sao-menu #main-menu > .menu-wrapper > img:nth-child(5){ animation-delay: 0s }
 
 /* The animation code */
 @keyframes example {

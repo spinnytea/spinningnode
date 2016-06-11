@@ -18,8 +18,9 @@
   "unused": true,
   "white": true,
 
-  "browser": false,
-  "node": true,
+  "browser": true,
+  "browserify": true,
+  "node": false,
 
   "globals": {
     "angular": true
