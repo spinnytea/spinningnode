@@ -1,5 +1,11 @@
 <div id="main-menu">
     <div class="menu-wrapper">
-        <img ng-repeat="i in items" ng-src="saomenu/images/Ringed%20{{i.icon}}{{isSelected(i)?'_on':''}}.svg" />
+        <span class="top">
+            <img ng-repeat="item in items" ng-src="saomenu/images/Ringed%20{{item.icon}}{{isSelected(0, item)?'_on':''}}.svg" ng-class="{ 'active': isSelected(0, item)}" />
+        </span>
+
+        <span ng-repeat="sub in submenus">
+            things!
+        </span>
     </div>
 </div>
