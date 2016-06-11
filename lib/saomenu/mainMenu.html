@@ -5,8 +5,8 @@
         </span>
 
         <div class="submenu" ng-repeat="submenu in submenus">
-            <div class="submenu-item" ng-repeat="sub in submenu">
-                <img ng-src="saomenu/images/{{sub.icon}}.svg" />
+            <div class="submenu-item" ng-repeat="sub in submenu"  ng-class="{ 'active': isSelected($parent.$index+1, sub)}">
+                <img ng-src="saomenu/images/{{sub.icon}}{{isSelected($parent.$index+1, sub)?'_on':''}}.svg" />
                 <label ng-bind="sub.label"></label>
             </div>
         </div>
