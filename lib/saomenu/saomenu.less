@@ -22,6 +22,7 @@ h1 {
 }
 
 //
+@inactiveOpacity: 0.6;
 
 #sao-menu #main-menu {
   position: fixed;
@@ -39,12 +40,11 @@ h1 {
 #sao-menu #main-menu > .menu-wrapper > .top > img {
   display: block;
   width: 3em;
-  height: 3em;
   margin-bottom: 0.5em;
 
   position: relative;
   top: 0;
-  opacity: 0.5;
+  opacity: @inactiveOpacity;
   animation-name: top_slide_in;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
@@ -63,5 +63,28 @@ h1 {
 /* The animation code */
 @keyframes top_slide_in {
   from { top: -100px; opacity: 0; }
-  to { top: 0; opacity: 0.5; }
+  to { top: 0; opacity: @inactiveOpacity; }
+}
+
+//
+
+#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item {
+  height: 3em;
+  line-height: 3em;
+  width: 10em;
+  background: white;
+  opacity: @inactiveOpacity;
+  margin-bottom: 3px;
+}
+#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item img {
+  width: 2em;
+  vertical-align: middle;
+  margin: -0.2em 0.4em 0 0.8em;
+}
+#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item label {
+  vertical-align: middle;
+}
+
+#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item.active {
+
 }
