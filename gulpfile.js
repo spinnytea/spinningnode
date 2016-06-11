@@ -23,6 +23,7 @@ var html = [ 'lib/**/*.html' ];
 var css = [ 'lib/**/*.less', '!lib/palette/*.less' ];
 var resource = [
   'lib/**/*.otf',
+  'lib/**/*.wav',
   'lib/**/*.png', 'lib/**/*.jpg', 'lib/**/*.svg',
   'index.html'
 ];
