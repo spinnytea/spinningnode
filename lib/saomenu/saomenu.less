@@ -60,7 +60,6 @@ h1 {
   opacity: 1;
 }
 
-/* The animation code */
 @keyframes top_slide_in {
   from { top: -100px; opacity: 0; }
   to { top: 0; opacity: @inactiveOpacity; }
@@ -73,8 +72,15 @@ h1 {
   line-height: 3em;
   width: 10em;
   background: white;
-  opacity: @inactiveOpacity;
   margin-bottom: 3px;
+
+  position: relative;
+  left: 0;
+  opacity: @inactiveOpacity;
+  animation-name: submenu_slide_in;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: backwards;
 }
 #sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item img {
   width: 2em;
@@ -88,6 +94,11 @@ h1 {
 #sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item.active {
   background-color: #EBA601;
   opacity: 1;
+}
+
+@keyframes submenu_slide_in {
+  from { left: 100px; opacity: 0; }
+  to { left: 0; opacity: @inactiveOpacity; }
 }
 
 //
