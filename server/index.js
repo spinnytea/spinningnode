@@ -6,4 +6,6 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
+app.use('/asym', require('./asym_proto'));
+
 app.listen(3000);
