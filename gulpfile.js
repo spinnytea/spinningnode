@@ -8,11 +8,17 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var less = require('gulp-less');
 var mocha = require('gulp-mocha');
+var nodemon = require('gulp-nodemon');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
 var zip = require('gulp-zip');
+
+//
+// Client
+// - build tasks
+//
 
 var entryPoint = './index.js';
 var outputName = 'spinningnode.js';
@@ -93,4 +99,21 @@ gulp.task('mocha', ['lint'], function() {
 gulp.task('test', [], function() {
   gulp.watch(['lib/**/*.js', 'test/**/*.js'], ['mocha']);
   gulp.start('mocha');
+});
+
+//
+// Server
+// - startup and maintenance
+//
+
+gulp.task('server', [], function() {
+  nodemon({
+    script: 'server/index.js',
+    ext: 'js',
+    watch: ['server/**/*.js'],
+    ignore: ['ignored.js'],
+    tasks: ['lint']
+  }).on('restart', function () {
+    console.log('restarted!')
+  });
 });

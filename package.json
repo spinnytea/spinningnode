@@ -11,6 +11,8 @@
   "author": "Garrett Tjarks <spinnytea@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.14.0",
+    "gulp-nodemon": "^2.1.0",
     "lodash": "^4.12.0"
   },
   "devDependencies": {
