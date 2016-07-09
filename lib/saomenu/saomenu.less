@@ -1,113 +1,113 @@
-@font-face {
-  font-family: sword_art_online;
-  src: url(sword_art_online_font_by_darkblackswords-d5nssbp.otf);
-}
-
 #sao-menu {
+  @font-face {
+    font-family: sword_art_online;
+    src: url(sword_art_online_font_by_darkblackswords-d5nssbp.otf);
+  }
+
   background-image: url('images/scenery.jpg');
   height: 100%;
   font-family: sword_art_online, "Trebuchet MS", Verdana, sans-serif;
-}
 
-h1 {
-  color: white;
-  text-align: center;
-  font-size: 5em;
+  h1 {
+    color: white;
+    text-align: center;
+    font-size: 5em;
 
-  /* TODO this isn't exactly right */
-  /* we probably need an span around the contents and set the border bottom, which I don't realllly like */
-  /* I suppose we could have something like h1>span.underline, that would make sense */
-  /* but this isn't a big deal right now */
-  text-decoration: underline;
-}
+    /* TODO this isn't exactly right */
+    /* we probably need an span around the contents and set the border bottom, which I don't realllly like */
+    /* I suppose we could have something like h1>span.underline, that would make sense */
+    /* but this isn't a big deal right now */
+    text-decoration: underline;
+  }
 
-//
-@inactiveOpacity: 0.6;
+  //
+  @inactiveOpacity: 0.6;
 
-#sao-menu #main-menu {
-  position: fixed;
-  left: 0; right: 0; top: 0; bottom: 0;
-  background-color: rgba(0,0,0, 0.5);
-}
+  #main-menu {
+    position: fixed;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background-color: rgba(0,0,0, 0.5);
+  }
 
-#sao-menu #main-menu > .menu-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-}
+  #main-menu > .menu-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 
-#sao-menu #main-menu > .menu-wrapper > .top > img {
-  display: block;
-  width: 3em;
-  margin-bottom: 0.5em;
+  #main-menu > .menu-wrapper > .top > img {
+    display: block;
+    width: 3em;
+    margin-bottom: 0.5em;
 
-  position: relative;
-  top: 0;
-  opacity: @inactiveOpacity;
-  animation-name: top_slide_in;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: backwards;
-}
-#sao-menu #main-menu > .menu-wrapper > .top > img:nth-child(1){ animation-delay: .5s }
-#sao-menu #main-menu > .menu-wrapper > .top > img:nth-child(2){ animation-delay: .4s }
-#sao-menu #main-menu > .menu-wrapper > .top > img:nth-child(3){ animation-delay: .3s }
-#sao-menu #main-menu > .menu-wrapper > .top > img:nth-child(4){ animation-delay: .2s }
-#sao-menu #main-menu > .menu-wrapper > .top > img:nth-child(5){ animation-delay: .1s }
+    position: relative;
+    top: 0;
+    opacity: @inactiveOpacity;
+    animation-name: top_slide_in;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: backwards;
+  }
+  #main-menu > .menu-wrapper > .top > img:nth-child(1){ animation-delay: .5s }
+  #main-menu > .menu-wrapper > .top > img:nth-child(2){ animation-delay: .4s }
+  #main-menu > .menu-wrapper > .top > img:nth-child(3){ animation-delay: .3s }
+  #main-menu > .menu-wrapper > .top > img:nth-child(4){ animation-delay: .2s }
+  #main-menu > .menu-wrapper > .top > img:nth-child(5){ animation-delay: .1s }
 
-#sao-menu #main-menu > .menu-wrapper > .top > img.active {
-  opacity: 1;
-}
+  #main-menu > .menu-wrapper > .top > img.active {
+    opacity: 1;
+  }
 
-@keyframes top_slide_in {
-  from { top: -100px; opacity: 0; }
-  to { top: 0; opacity: @inactiveOpacity; }
-}
+  @keyframes top_slide_in {
+    from { top: -100px; opacity: 0; }
+    to { top: 0; opacity: @inactiveOpacity; }
+  }
 
-//
+  //
 
-#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item {
-  height: 3em;
-  line-height: 3em;
-  width: 10em;
-  background: white;
-  margin-bottom: 3px;
+  #main-menu > .menu-wrapper > .submenu > .submenu-item {
+    height: 3em;
+    line-height: 3em;
+    width: 10em;
+    background: white;
+    margin-bottom: 3px;
 
-  position: relative;
-  left: 0;
-  opacity: @inactiveOpacity;
-  animation-name: submenu_slide_in;
-  animation-duration: 0.3s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: backwards;
-}
-#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item img {
-  width: 2em;
-  vertical-align: middle;
-  margin: -0.2em 0.4em 0 0.8em;
-}
-#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item label {
-  vertical-align: middle;
-}
+    position: relative;
+    left: 0;
+    opacity: @inactiveOpacity;
+    animation-name: submenu_slide_in;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: backwards;
+  }
+  #main-menu > .menu-wrapper > .submenu > .submenu-item img {
+    width: 2em;
+    vertical-align: middle;
+    margin: -0.2em 0.4em 0 0.8em;
+  }
+  #main-menu > .menu-wrapper > .submenu > .submenu-item label {
+    vertical-align: middle;
+  }
 
-#sao-menu #main-menu > .menu-wrapper > .submenu > .submenu-item.active {
-  background-color: #EBA601;
-  opacity: 1;
-}
+  #main-menu > .menu-wrapper > .submenu > .submenu-item.active {
+    background-color: #EBA601;
+    opacity: 1;
+  }
 
-@keyframes submenu_slide_in {
-  from { left: 100px; opacity: 0; }
-  to { left: 0; opacity: @inactiveOpacity; }
-}
+  @keyframes submenu_slide_in {
+    from { left: 100px; opacity: 0; }
+    to { left: 0; opacity: @inactiveOpacity; }
+  }
 
-//
+  //
 
-#sao-menu #main-menu > .menu-wrapper > .top {
-  display: inline-block;
-}
-#sao-menu #main-menu > .menu-wrapper > .submenu {
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 1em;
+  #main-menu > .menu-wrapper > .top {
+    display: inline-block;
+  }
+  #main-menu > .menu-wrapper > .submenu {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1em;
+  }
 }
