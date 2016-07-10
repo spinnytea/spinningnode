@@ -1,1 +1,9 @@
-{{message}}
+<div ng-if="!init">
+    {{message}}
+</div>
+
+<div class="jumbotron" ng-if="init">
+    <h1><i class="fa fa-exclamation-triangle text-danger"></i> The Server is Down</h1>
+    <p>Please try again later.</p>
+    <p><button class="btn btn-primary" ng-click="init">Reload</button></p>
+</div>

@@ -8,8 +8,8 @@ var _ = require('lodash');
 
 var app = module.exports = require('express')();
 
-app.get('/', function(req, res) {
-  res.send('Hello Asymmetric Prototype')
+app.get('/ping', function(req, res) {
+  res.sendStatus(204);
 });
 
 app.get('/players', function(req, res) {

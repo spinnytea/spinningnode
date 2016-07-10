@@ -108,9 +108,9 @@ gulp.task('test', [], function() {
 
 gulp.task('server', [], function() {
   nodemon({
-    script: 'server/index.js',
+    script: 'server.js',
     ext: 'js',
-    watch: ['server/**/*.js'],
+    watch: ['server.js', 'server/**/*.js'],
     ignore: ['ignored.js'],
     tasks: ['lint']
   }).on('restart', function () {
