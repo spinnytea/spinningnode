@@ -28,9 +28,12 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/saomenu', {
     controller: 'spinningnode.sao.menu.main.controller',
     templateUrl: 'saomenu/main.html'
-  }).when('/asym_proto', {
+  }).when('/asym_proto/main', {
     controller: 'spinningnode.asym_proto.main.controller',
     templateUrl: 'asym_proto/main.html'
+  }).when('/asym_proto/alt1', {
+    controller: 'spinningnode.asym_proto.alt1.controller',
+    templateUrl: 'asym_proto/alt1.html'
   }).otherwise({
     templateUrl: 'oops.html'
   });
