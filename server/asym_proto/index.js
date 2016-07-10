@@ -33,7 +33,7 @@ function createPlayer({name, color}) {
   GAME_STATE.players.push({
     name: name,
     color: color,
-    x: 0,
+    x: GAME_STATE.players.length,
     y: 0
   });
 }

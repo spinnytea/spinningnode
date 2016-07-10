@@ -15,6 +15,8 @@ var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
 var zip = require('gulp-zip');
 
+gulp.task('dev', ['server', 'buildd']);
+
 //
 // Client
 // - build tasks
@@ -106,13 +108,18 @@ gulp.task('test', [], function() {
 // - startup and maintenance
 //
 
-gulp.task('server', [], function() {
+gulp.task('server-lint', [], function () {
+  return gulp.src('server/**/*.js').pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('server', ['server-lint'], function() {
   nodemon({
     script: 'server.js',
     ext: 'js',
     watch: ['server.js', 'server/**/*.js'],
-    ignore: ['ignored.js'],
-    tasks: ['lint']
+    tasks: ['server-lint']
   }).on('restart', function () {
     console.log('restarted!')
   });

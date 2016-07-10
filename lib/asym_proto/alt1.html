@@ -1,5 +1,24 @@
 <div ng-if="!init">
-    {{message}}
+    <div class="bg-info text-info text-center" ng-bind="message"></div>
+
+    <table class="table">
+        <thead><tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>X</th>
+            <th>Y</th>
+        </tr></thead>
+        <tbody><tr ng-repeat="p in players">
+            <td ng-bind="p.name"></td>
+            <td ng-bind="p.color" style="background-color:{{p.color}};"></td>
+            <td ng-bind="p.x | number"></td>
+            <td ng-bind="p.y | number"></td>
+        </tr></tbody>
+        <tfoot><tr ng-if="!players.length">
+            <td colspan="2" class="disabled">No current players</td>
+        </tr>
+        </tfoot>
+    </table>
 </div>
 
 <div class="jumbotron" ng-if="init">
