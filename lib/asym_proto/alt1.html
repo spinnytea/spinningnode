@@ -1,14 +1,17 @@
 <div ng-if="!init">
     <div class="bg-info text-info text-center" ng-bind="message"></div>
+    <a href="#/asym_proto/main">Goto Main</a>
 
     <table class="table">
         <thead><tr>
+            <th></th>
             <th>Name</th>
             <th>Color</th>
             <th>X</th>
             <th>Y</th>
         </tr></thead>
         <tbody><tr ng-repeat="p in players">
+            <td><button class="btn btn-default btn-sm" ng-click="updateNext($index)" ng-disabled="isUpdateNext($index)"><i class="fa fa-refresh" ng-class="{'fa-spin': currUpdateName === p.name}"></i></button></td>
             <td ng-bind="p.name"></td>
             <td ng-bind="p.color" style="background-color:{{p.color}};"></td>
             <td ng-bind="p.x | number"></td>
@@ -24,5 +27,8 @@
 <div class="jumbotron" ng-if="init">
     <h1><i class="fa fa-exclamation-triangle text-danger"></i> The Server is Down</h1>
     <p>Please try again later.</p>
-    <p><button class="btn btn-primary" ng-click="init">Reload</button></p>
+    <p>
+        <button class="btn btn-default" ng-click="init()">Reload</button>
+        <a class="btn btn-default" href="#/asym_proto/main">Goto Main</a>
+    </p>
 </div>

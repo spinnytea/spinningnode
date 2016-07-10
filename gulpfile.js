@@ -109,7 +109,9 @@ gulp.task('test', [], function() {
 //
 
 gulp.task('server-lint', [], function () {
-  return gulp.src('server/**/*.js').pipe(jshint())
+  return gulp.src('server/**/*.js').pipe(jshint({
+    esversion: 6
+  }))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
 });
