@@ -8,27 +8,41 @@
 <div ng-if="!init">
     <div class="bg-info text-info text-center" ng-bind="message"></div>
 
-    <form>
+    <form class="form-horizontal">
         <h2>Login</h2>
 
-        <label for="name">Player Name</label>
-        <input class="form-control" type="text" id="name" name="name" ng-model="loginData.name" />
-        <button class="btn btn-default" ng-click="loadPlayer()">Load</button>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">Player Name</label>
+            <div class="col-sm-10"><input class="form-control" type="text" id="name" name="name" ng-model="loginData.name" /></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10"><button class="btn btn-default" ng-click="loadPlayer()">Load</button></div>
+        </div>
     </form>
 
-    <form ng-if="player">
+    <form class="form-horizontal" ng-if="player">
         <h2 ng-bind="player.name"></h2>
 
-        <label for="color">Color</label>
-        <input class="form-control" type="color" id="color" name="color" ng-model="player.color" />
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="color">Color</label>
+            <div class="col-sm-10"><input class="form-control" type="color" id="color" name="color" ng-model="player.color" /></div>
+        </div>
 
-        <label for="x">X</label>
-        <input class="form-control" type="number" id="x" name="x" ng-model="player.x" />
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="x">X</label>
+            <div class="col-sm-10"><input class="form-control" type="number" id="x" name="x" ng-model="player.x" /></div>
+        </div>
 
-        <label for="y">Y</label>
-        <input class="form-control" type="number" id="y" name="y" ng-model="player.y" />
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="y">Y</label>
+            <div class="col-sm-10"><input class="form-control" type="number" id="y" name="y" ng-model="player.y" /></div>
+        </div>
 
-        <button class="btn btn-default" ng-click="savePlayer()">Save</button>
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10"><button class="btn btn-default" ng-click="savePlayer()">Save</button></div>
+        </div>
     </form>
 </div>
 
