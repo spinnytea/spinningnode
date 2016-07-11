@@ -1,12 +1,13 @@
 'use strict';
-var _ = require('lodash');
 /*
  * Asymmetric Prototype
  *
  * I just want to SEE it, and then maybe test out some ideas.
  */
 
+var _ = require('lodash');
 var app = module.exports = require('express')();
+app.use(require('body-parser').json()); // for parsing application/json
 
 app.get('/ping', function(req, res) {
   res.sendStatus(204);
@@ -21,6 +22,13 @@ app.get('/players/:name', function(req, res) {
     res.json(player);
   else
     res.sendStatus(404);
+});
+app.put('/players/:name', function(req, res) {
+  // FIXME error handling
+  var player = _.find(GAME_STATE.players, {name: req.params.name});
+  var input = req.body; // FIXME sanitize input
+  _.merge(player, input);
+  res.sendStatus(203);
 });
 
 //

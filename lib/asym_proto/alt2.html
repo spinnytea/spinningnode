@@ -1,0 +1,42 @@
+<h1>Asymmetric Prototype (alt2)</h1>
+<p>
+    Go to:
+    <a href="#/asym_proto/main">main</a>
+    <a href="#/asym_proto/alt1">alt1</a>
+</p>
+
+<div ng-if="!init">
+    <div class="bg-info text-info text-center" ng-bind="message"></div>
+
+    <form>
+        <h2>Login</h2>
+
+        <label for="name">Player Name</label>
+        <input class="form-control" type="text" id="name" name="name" ng-model="loginData.name" />
+        <button class="btn btn-default" ng-click="loadPlayer()">Load</button>
+    </form>
+
+    <form ng-if="player">
+        <h2 ng-bind="player.name"></h2>
+
+        <label for="color">Color</label>
+        <input class="form-control" type="color" id="color" name="color" ng-model="player.color" />
+
+        <label for="x">X</label>
+        <input class="form-control" type="number" id="x" name="x" ng-model="player.x" />
+
+        <label for="y">Y</label>
+        <input class="form-control" type="number" id="y" name="y" ng-model="player.y" />
+
+        <button class="btn btn-default" ng-click="savePlayer()">Save</button>
+    </form>
+</div>
+
+<div class="jumbotron" ng-if="init">
+    <h1><i class="fa fa-exclamation-triangle text-danger"></i> The Server is Down</h1>
+    <p>Please try again later.</p>
+    <p>
+        <button class="btn btn-default" ng-click="init()">Reload</button>
+        <a class="btn btn-default" href="#/asym_proto/main">Goto Main</a>
+    </p>
+</div>

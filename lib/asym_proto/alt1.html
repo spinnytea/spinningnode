@@ -1,6 +1,12 @@
+<h1>Asymmetric Prototype (alt1)</h1>
+<p>
+    Go to:
+    <a href="#/asym_proto/main">main</a>
+    <a href="#/asym_proto/alt2">alt2</a>
+</p>
+
 <div ng-if="!init">
     <div class="bg-info text-info text-center" ng-bind="message"></div>
-    <a href="#/asym_proto/main">Goto Main</a>
 
     <table class="table">
         <thead><tr>
@@ -18,7 +24,7 @@
             <td ng-bind="p.y | number"></td>
         </tr></tbody>
         <tfoot><tr ng-if="!players.length">
-            <td colspan="2" class="disabled">No current players</td>
+            <td colspan="5" class="disabled">No current players</td>
         </tr>
         </tfoot>
     </table>

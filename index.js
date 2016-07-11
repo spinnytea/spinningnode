@@ -34,6 +34,9 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/asym_proto/alt1', {
     controller: 'spinningnode.asym_proto.alt1.controller',
     templateUrl: 'asym_proto/alt1.html'
+  }).when('/asym_proto/alt2', {
+    controller: 'spinningnode.asym_proto.alt2.controller',
+    templateUrl: 'asym_proto/alt2.html'
   }).otherwise({
     templateUrl: 'oops.html'
   });
