@@ -19,7 +19,7 @@
         <tbody><tr ng-repeat="p in players">
             <td><button class="btn btn-default btn-sm" ng-click="updateNext($index)" ng-disabled="isUpdateNext($index)"><i class="fa fa-refresh" ng-class="{'fa-spin': currUpdateName === p.name}"></i></button></td>
             <td ng-bind="p.name"></td>
-            <td ng-bind="p.color" style="background-color:{{p.color}};"></td>
+            <td ng-bind="p.color" style="background-color:{{p.color}};color:{{contrast(p.color)}};"></td>
             <td ng-bind="p.x | number"></td>
             <td ng-bind="p.y | number"></td>
         </tr></tbody>
