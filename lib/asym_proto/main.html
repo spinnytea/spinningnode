@@ -2,11 +2,12 @@
 <div ng-include="'asym_proto/serverIsDownPartial.html'"></div>
 
 <div class="asym-proto-main" ng-if="!init">
-    <div class="bg-info text-info text-center" ng-bind="message"></div>
+    <p class="bg-info text-info text-center" ng-bind="message"></p>
+    <p>You are controlling: <label class="label" ng-class="{'label-default disabled': !activePlayer, 'label-info': activePlayer}" ng-bind="activePlayer.name || 'no one'"></label></p>
 
     <div class="game-area">
-        <div class="player" ng-repeat="p in players" style="top: {{p.y}}em; left: {{p.x}}em;">
-            <span class="box" style="background-color: {{p.color}};"></span>
+        <div class="player" ng-class="{'active': (p.name === activePlayer.name)}" ng-repeat="p in players" style="top: {{p.y}}em; left: {{p.x}}em;">
+            <span class="box" style="background-color: {{p.color}};" ng-click="selectPlayer(p)"></span>
             <span class="name" ng-bind="p.name"></span>
         </div>
     </div>
