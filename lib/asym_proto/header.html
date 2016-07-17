@@ -1,1 +1,5 @@
 <h1>Asymmetric Prototype <small ng-bind="page.subtitle"></small></h1>
+<p>
+    Go to:
+    <a ng-repeat="p in pages" ng-hide="p == page" ng-bind="p.subtitle" ng-href="#{{p.path}}"></a>
+</p>
