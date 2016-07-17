@@ -1,4 +1,5 @@
 <div asym-proto-page-header></div>
+<div ng-include="'asym_proto/serverIsDownPartial.html'"></div>
 
 <div ng-if="!init">
     <div class="bg-info text-info text-center" ng-bind="message"></div>
@@ -42,18 +43,9 @@
             </div>
         </div>
     </form>
-</div>
 
-<div class="jumbotron" ng-if="init">
-    <h1><i class="fa fa-exclamation-triangle text-danger"></i> The Server is Down</h1>
-    <p>Please try again later.</p>
-    <p>
-        <button class="btn btn-default" ng-click="init()">Reload</button>
-        <a class="btn btn-default" href="#/asym_proto/main">Goto Main</a>
-    </p>
-</div>
-
-<div class="jumbotron" ng-if="playerDNE">
-    <h1><i class="fa fa-question-circle text-warning"></i> Could not find player.</h1>
-    <p>This does not appear to be a player in our system.</p>
+    <div class="jumbotron" ng-if="playerDNE">
+        <h1><i class="fa fa-question-circle text-warning"></i> Could not find player.</h1>
+        <p>This does not appear to be a player in our system.</p>
+    </div>
 </div>
