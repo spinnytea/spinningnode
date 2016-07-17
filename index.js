@@ -31,12 +31,12 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/asym_proto/main', {
     controller: 'spinningnode.asym_proto.main.controller',
     templateUrl: 'asym_proto/main.html'
-  }).when('/asym_proto/alt1', {
-    controller: 'spinningnode.asym_proto.alt1.controller',
-    templateUrl: 'asym_proto/alt1.html'
-  }).when('/asym_proto/alt2', {
-    controller: 'spinningnode.asym_proto.alt2.controller',
-    templateUrl: 'asym_proto/alt2.html'
+  }).when('/asym_proto/players', {
+    controller: 'spinningnode.asym_proto.players.controller',
+    templateUrl: 'asym_proto/players.html'
+  }).when('/asym_proto/player', {
+    controller: 'spinningnode.asym_proto.player.controller',
+    templateUrl: 'asym_proto/player.html'
   }).otherwise({
     templateUrl: 'oops.html'
   });
