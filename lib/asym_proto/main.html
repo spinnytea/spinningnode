@@ -3,6 +3,7 @@
 
 <div class="asym-proto-main" ng-if="!init">
     <p class="bg-info text-info text-center" ng-bind="message"></p>
+    <p>Click on a player, use the arrow keys.</p>
     <p>You are controlling: <label class="label" ng-class="{'label-default disabled': !activePlayer, 'label-info': activePlayer}" ng-bind="activePlayer.name || 'no one'"></label></p>
 
     <div class="game-area">
