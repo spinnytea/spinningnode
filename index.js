@@ -34,6 +34,9 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/asym_proto/players', {
     controller: 'spinningnode.asym_proto.players.controller',
     templateUrl: 'asym_proto/players.html'
+  }).when('/asym_proto/players/:name', {
+    controller: 'spinningnode.asym_proto.player.controller',
+    templateUrl: 'asym_proto/player.html'
   }).when('/asym_proto/player', {
     controller: 'spinningnode.asym_proto.player.controller',
     templateUrl: 'asym_proto/player.html'

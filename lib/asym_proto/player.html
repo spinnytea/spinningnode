@@ -8,7 +8,7 @@
 <div ng-if="!init">
     <div class="bg-info text-info text-center" ng-bind="message"></div>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" data-ng-if="allowLogin">
         <h2>Login</h2>
 
         <div class="form-group">
@@ -41,7 +41,10 @@
 
         <div class="form-group">
             <div class="col-sm-2"></div>
-            <div class="col-sm-10"><button class="btn btn-default" ng-click="savePlayer()">Save</button></div>
+            <div class="col-sm-10">
+                <button class="btn btn-default" ng-click="savePlayer()">Save</button>
+                <button class="btn btn-default" ng-click="loadPlayer()">Reload</button>
+            </div>
         </div>
     </form>
 </div>
@@ -53,4 +56,9 @@
         <button class="btn btn-default" ng-click="init()">Reload</button>
         <a class="btn btn-default" href="#/asym_proto/main">Goto Main</a>
     </p>
+</div>
+
+<div class="jumbotron" ng-if="playerDNE">
+    <h1><i class="fa fa-question-circle text-warning"></i> Could not find player.</h1>
+    <p>This does not appear to be a player in our system.</p>
 </div>
