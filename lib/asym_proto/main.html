@@ -1,3 +1,13 @@
 <div asym-proto-page-header></div>
+<div ng-include="'asym_proto/serverIsDownPartial.html'"></div>
 
-{{message}}
+<div class="asym-proto-main" ng-if="!init">
+    <div class="bg-info text-info text-center" ng-bind="message"></div>
+
+    <div class="game-area">
+        <div class="player" ng-repeat="p in players" style="top: {{p.y}}em; left: {{p.x}}em;">
+            <span class="box" style="background-color: {{p.color}};"></span>
+            <span class="name" ng-bind="p.name"></span>
+        </div>
+    </div>
+</div>
