@@ -1,0 +1,41 @@
+<div>
+    <a href="#/event_tracker">Home</a>
+</div>
+
+<form>
+    <div class="form-group" ng-if="games.length">
+        <label for="game">Pick Game</label>
+        <select class="form-control" id="game" name="game" ng-model="form.game" ng-options="g for g in games">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group" ng-if="!form.game">
+        <label for="create_game">Create Game</label>
+        <div class="input-group">
+            <input class="form-control" id="create_game" name="create_game" ng-model="form.create_game">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="createGame()"><i class="fa fa-plus"></i></button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<form ng-if="form.game">
+    <div class="form-group" ng-if="events.length">
+        <label for="event">Pick Event</label>
+        <select class="form-control" id="event" name="event" ng-model="form.event" ng-options="e.name for e in events">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="create_event">Create Event</label>
+        <div class="input-group">
+            <input class="form-control" id="create_event" name="create_event" ng-model="form.create_event">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="createEvent()"><i class="fa fa-plus"></i></button>
+            </span>
+        </div>
+    </div>
+</form>

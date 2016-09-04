@@ -6,6 +6,7 @@ module.exports = angular.module('spinningnode', [
   require('./lib/battlesudoku').name,
   require('./lib/saomenu').name,
   require('./lib/asym_proto').name,
+  require('./lib/event_tracker').name,
   'templates',
   'drahak.hotkeys',
   'ngRoute'
