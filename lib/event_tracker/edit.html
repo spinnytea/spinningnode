@@ -22,11 +22,13 @@
     </div>
 </form>
 
+<hr>
+
 <form ng-if="form.game">
     <div class="form-group" ng-if="events.length">
         <label for="event">Pick Event</label>
         <select class="form-control" id="event" name="event" ng-model="form.event"
-                ng-options="e.name for e in events track by e.name">
+                ng-options="e.name for e in events track by e.id">
             <option ng-value=""></option>
         </select>
     </div>
@@ -41,5 +43,20 @@
         </div>
     </div>
 </form>
+
+<hr>
+
+<form ng-if="form.event">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" id="name" name="name" ng-model="form.event.name">
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea class="form-control" id="notes" name="notes" ng-model="form.event.notes"></textarea>
+    </div>
+</form>
+
 
 <button class="btn btn-danger" ng-click="BOOM()"><i class="fa fa-fw fa-bomb"></i>BOOM!</button>
