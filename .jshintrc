@@ -23,6 +23,7 @@
   "node": false,
 
   "globals": {
-    "angular": true
+    "angular": true,
+    "console": true
   }
 }
