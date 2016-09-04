@@ -9,6 +9,7 @@ module.exports = angular.module('spinningnode', [
   require('./lib/event_tracker').name,
   'templates',
   'drahak.hotkeys',
+  'LocalStorageModule',
   'ngRoute'
 ]);
 module.exports.config(['$routeProvider', function($routeProvider) {
