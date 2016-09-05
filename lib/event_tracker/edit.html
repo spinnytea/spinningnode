@@ -3,7 +3,7 @@
 </div>
 
 <form>
-    <div class="form-group" ng-if="games.length">
+    <div class="form-group" ng-show="games.length">
         <label for="game">Pick Game</label>
         <select class="form-control" id="game" name="game" ng-model="form.game"
                 ng-options="g for g in games">
@@ -11,7 +11,7 @@
         </select>
     </div>
 
-    <div class="form-group" ng-if="!form.game">
+    <div class="form-group" ng-hide="form.game">
         <label for="create_game">Create Game</label>
         <div class="input-group">
             <input class="form-control" id="create_game" name="create_game" ng-model="form.create_game">
@@ -24,11 +24,11 @@
 
 <hr>
 
-<form ng-if="form.game">
-    <div class="form-group" ng-if="events.length">
+<form ng-show="form.game">
+    <div class="form-group" ng-show="events.length">
         <label for="event">Pick Event</label>
         <select class="form-control" id="event" name="event" ng-model="form.event"
-                ng-options="e.name for e in events track by e.id">
+                ng-options="e.name for e in events">
             <option ng-value=""></option>
         </select>
     </div>
@@ -46,7 +46,7 @@
 
 <hr>
 
-<form ng-if="form.event">
+<form ng-show="form.event">
     <div class="form-group">
         <label for="name">Name</label>
         <input class="form-control" id="name" name="name" ng-model="form.event.name" ng-model-options="debounce">
