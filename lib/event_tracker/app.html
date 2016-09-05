@@ -1,8 +1,9 @@
 <div>
     <a href="#/event_tracker/edit">Edit Games</a>
 </div>
-<div>
-    Data Overview
+<div class="jumbotron">
+    <h2>Game Catalog</h2>
+    <p ng-repeat="g in games" ng-bind="g"></p>
 </div>
 <div>
     Links to open games
