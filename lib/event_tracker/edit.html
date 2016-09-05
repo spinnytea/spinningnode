@@ -63,7 +63,13 @@
                 ng-options="e.id as e.name for e in events">
         </select>
     </div>
-</form>
 
+    <div class="form-group">
+        <label for="term">Termination</label>
+        <select multiple class="form-control" id="term" name="term" ng-model="form.event.term"
+                ng-options="e.id as e.name for e in events">
+        </select>
+    </div>
+</form>
 
 <button class="btn btn-danger" ng-click="BOOM()"><i class="fa fa-fw fa-bomb"></i>BOOM!</button>
