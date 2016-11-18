@@ -8,6 +8,23 @@ describe.only('bpn', function() {
       expect(NeuralNetwork.units.matrix(2, 3)).to.deep.equal([[0,0,0],[0,0,0]]);
     });
 
+    it('random', function() {
+      const r = NeuralNetwork.units.random([[0,0,0],[0,0,0]]);
+      // XXX should we really test the values themselves?
+      expect(r[0][0]).to.be.at.least(0);
+      expect(r[0][0]).to.be.below(1);
+      expect(r[0][1]).to.be.at.least(0);
+      expect(r[0][1]).to.be.below(1);
+      expect(r[0][2]).to.be.at.least(0);
+      expect(r[0][2]).to.be.below(1);
+      expect(r[1][0]).to.be.at.least(0);
+      expect(r[1][0]).to.be.below(1);
+      expect(r[1][1]).to.be.at.least(0);
+      expect(r[1][1]).to.be.below(1);
+      expect(r[1][2]).to.be.at.least(0);
+      expect(r[1][2]).to.be.below(1);
+    });
+
     describe('matmul', function() {
       const A = [
         [ 1, 2, 3 ],
