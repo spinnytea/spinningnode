@@ -2,7 +2,7 @@
 const expect = require('chai').expect;
 const NeuralNetwork = require('../../lib/neural/bpn');
 
-describe.only('bpn', function() {
+describe('bpn', function() {
   describe('NeuralNetwork', function() {
     it('constructor', function() {
       const nn = new NeuralNetwork(3, 2, 1);
@@ -28,6 +28,40 @@ describe.only('bpn', function() {
       // expect(nn.ho).to.deep.equal([[4, 5]]);
       // expect(nn.output).to.deep.equal([32, 40]);
     });
+
+    describe('train', function() {
+      it('a', function() {
+        const nn = new NeuralNetwork(2, 2, 2);
+        nn.learning_rate = 0.5;
+        // XXX init ih and ho, drop the loop count
+        for(let loop=0; loop<200; loop++) {
+          nn.train([1,0], [1,0]);
+          nn.train([0,1], [0,1]);
+        }
+        nn.feed([1,0]);
+        expect(nn.output[0]).to.be.above(0.5);
+        expect(nn.output[1]).to.be.below(0.5);
+        nn.feed([0,1]);
+        expect(nn.output[0]).to.be.below(0.5);
+        expect(nn.output[1]).to.be.above(0.5);
+      });
+
+      it('b', function() {
+        const nn = new NeuralNetwork(2, 2, 2);
+        nn.learning_rate = 0.5;
+        // XXX init ih and ho, drop the loop count
+        for(let loop=0; loop<200; loop++) {
+          nn.train([1,0], [0,1]);
+          nn.train([0,1], [1,0]);
+        }
+        nn.feed([1,0]);
+        expect(nn.output[0]).to.be.below(0.5);
+        expect(nn.output[1]).to.be.above(0.5);
+        nn.feed([0,1]);
+        expect(nn.output[0]).to.be.above(0.5);
+        expect(nn.output[1]).to.be.below(0.5);
+      });
+    }); // end train
   }); // end NeuralNetwork
 
   describe('units', function() {
