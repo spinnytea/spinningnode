@@ -21,6 +21,7 @@
   "browser": true,
   "browserify": true,
   "node": false,
+  "esversion": 6,
 
   "globals": {
     "angular": true,
