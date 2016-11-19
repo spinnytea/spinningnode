@@ -6,4 +6,13 @@
         <span ng-repeat="muncher in munchers" render-muncher></span>
     </div>
 
+    <div id="stats">
+        <h2>Keys</h2>
+        <dl>
+            <dt>p</dt>
+            <dd>pause <span class="label" ng-class="{'label-primary':timeoutId,'label-default':!timeoutId}" data-ng-bind="timeoutId?'running':'paused'"></span></dd>
+            <dt>a</dt>
+            <dd>toggle auto <span class="label" ng-class="{'label-primary':munchers[0].auto,'label-default':!munchers[0].auto}" data-ng-bind="munchers[0].auto?'guided':'self'"></span></dd>
+        </dl>
+    </div>
 </div>
