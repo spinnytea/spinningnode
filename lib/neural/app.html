@@ -31,6 +31,14 @@
             </dd>
         </dl>
 
+        <h2>Settings</h2>
+        <form>
+            <div class="form-group">
+                <label for="learningRate">Learning Rate</label>
+                <input class="form-control" type="number" step="0.01" min="0.01" max="0.5" id="learningRate" ng-model="Muncher.learningRate" />
+            </div>
+        </form>
+
         <h2>Munchers</h2>
         <div class="muncher-card" ng-repeat="muncher in munchers">
             <span render-muncher></span>
