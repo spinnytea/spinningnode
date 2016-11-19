@@ -23,6 +23,19 @@
                     ng-bind="munchers[0].auto?'guided':'self'"
                     ng-click="auto()"></span>
             </dd>
+            <dt>a</dt>
+            <dd>shuffle
+                <span class="label label-default" ng-click="shuffle()">
+                    <i class="fa fa-refresh"></i>
+                </span>
+            </dd>
         </dl>
+
+        <h2>Munchers</h2>
+        <div class="muncher-card" ng-repeat="muncher in munchers">
+            <div>trainer: <span ng-bind="muncher.trainer"></span></div>
+            <div>trainee: <span ng-bind="muncher.trainee | shortNumber: 1"></span></div>
+            <div>eat gap avg: <span ng-bind="muncher.eat_gap_avg"></span></div>
+        </div>
     </div>
 </div>

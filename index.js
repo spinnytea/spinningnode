@@ -77,3 +77,25 @@ module.exports.directive('btn', [function() {
     }
   };
 }]);
+module.exports.filter('shortNumber', [function() {
+  return function(number, precision, minimum) {
+    number = parseFloat(number);
+    precision = precision || 0;
+    minimum = minimum || 1000;
+
+    if(isNaN(number)) return '';
+    if(number < minimum) return number.toFixed(precision);
+
+    var powerOfTen = Math.floor(Math.log(Math.abs(number)) * Math.LOG10E);
+    switch(powerOfTen) {
+      case 3: case 4: case 5:
+        return (number / Math.pow(10, 3)).toFixed(precision) + 'k';
+      case 6: case 7: case 8:
+        return (number / Math.pow(10, 6)).toFixed(precision) + 'm';
+      case 9: case 10: case 11:
+        return (number / Math.pow(10, 9)).toFixed(precision) + 'b';
+      default:
+        return (number / Math.pow(10, 12)).toFixed(precision) + 't';
+    }
+  };
+}]);
