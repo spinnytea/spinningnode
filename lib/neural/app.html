@@ -33,6 +33,7 @@
 
         <h2>Munchers</h2>
         <div class="muncher-card" ng-repeat="muncher in munchers">
+            <span render-muncher></span>
             <div>trainer: <span ng-bind="muncher.trainer"></span></div>
             <div>trainee: <span ng-bind="muncher.trainee | shortNumber: 1"></span></div>
             <div>eat gap avg: <span ng-bind="muncher.eat_gap_avg"></span></div>
