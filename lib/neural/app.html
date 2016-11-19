@@ -10,9 +10,19 @@
         <h2>Keys</h2>
         <dl>
             <dt>p</dt>
-            <dd>pause <span class="label" ng-class="{'label-primary':timeoutId,'label-default':!timeoutId}" data-ng-bind="timeoutId?'running':'paused'"></span></dd>
+            <dd>pause
+                <span class="label"
+                    ng-class="{'label-primary':timeoutId,'label-default':!timeoutId}"
+                    ng-bind="timeoutId?'running':'paused'"
+                    ng-click="pause()"></span>
+            </dd>
             <dt>a</dt>
-            <dd>toggle auto <span class="label" ng-class="{'label-primary':munchers[0].auto,'label-default':!munchers[0].auto}" data-ng-bind="munchers[0].auto?'guided':'self'"></span></dd>
+            <dd>toggle auto
+                <span class="label"
+                    ng-class="{'label-primary':munchers[0].auto,'label-default':!munchers[0].auto}"
+                    ng-bind="munchers[0].auto?'guided':'self'"
+                    ng-click="auto()"></span>
+            </dd>
         </dl>
     </div>
 </div>
