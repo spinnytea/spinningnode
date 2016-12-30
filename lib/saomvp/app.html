@@ -1,17 +1,17 @@
 <div id="sao-mvp">
     <div class="player stats">
         <h1 data-ng-bind="player.name"></h1>
-        <p>Level: <span data-ng-bind="player.level"></span></p>
+        <div ng-repeat="s in stats"><span ng-bind="s"></span>: <span ng-bind="player[s]"></span></div>
 
         <table class="table table-condensed hidden-stats">
-            <tr ng-repeat="(key, val) in player.hidden" ng-if="!isObject(val)">
+            <tbody><tr ng-repeat="(key, val) in player.hidden" ng-if="!isObject(val)">
                 <td ng-bind="key"></td>
                 <td ng-bind="val"></td>
-            </tr>
-            <tr ng-repeat="(key, val) in player.hidden.max">
+            </tr></tbody>
+            <tbody><tr ng-repeat="(key, val) in player.hidden.max">
                 <td ng-bind="key"></td>
                 <td ng-bind="val"></td>
-            </tr>
+            </tr></tbody>
         </table>
     </div>
 </div>
