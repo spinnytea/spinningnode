@@ -6,6 +6,7 @@ module.exports = angular.module('spinningnode', [
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
   require('./lib/saomenu').name,
+  require('./lib/saomvp').name,
   require('./lib/asym_proto').name,
   require('./lib/event_tracker').name,
   'templates',
@@ -34,6 +35,9 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/saomenu', {
     controller: 'spinningnode.sao.menu.main.controller',
     templateUrl: 'saomenu/main.html'
+  }).when('/saomvp', {
+    controller: 'spinningnode.sao.mvp.main.controller',
+    templateUrl: 'saomvp/app.html'
   }).when('/asym_proto/main', {
     controller: 'spinningnode.asym_proto.main.controller',
     templateUrl: 'asym_proto/main.html'
