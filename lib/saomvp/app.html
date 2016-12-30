@@ -1,3 +1,11 @@
 <div id="sao-mvp">
-    {{message}}
+    <div class="player stats">
+        <h1 data-ng-bind="player.name"></h1>
+        <p>Level: <span data-ng-bind="player.level"></span></p>
+
+        <table class="table table-condensed hidden-stats"><tr ng-repeat="(key, val) in player.max">
+            <td ng-bind="key"></td>
+            <td ng-bind="val"></td>
+        </tr></table>
+    </div>
 </div>
