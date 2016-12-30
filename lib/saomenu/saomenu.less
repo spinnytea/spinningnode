@@ -22,6 +22,9 @@
 
   //
   @inactiveOpacity: 0.6;
+  @lightColor: white;
+  @darkColor: grey;
+  @accentColor: #EBA601;
 
   #main-menu {
     position: fixed;
@@ -36,10 +39,17 @@
     transform: translateY(-50%) translateX(-50%);
   }
 
-  #main-menu > .menu-wrapper > .top > img {
+  #main-menu > .menu-wrapper > .top > .icon {
     display: block;
-    width: 3em;
-    margin-bottom: 0.5em;
+    margin: 0 1em 0.5em 1em;
+
+    color: @darkColor;
+    background-color: @lightColor;
+    font-size: 1.5em;
+    border-radius: 3em;
+    padding: 0.5em;
+    text-align: center;
+    width: 2em;
 
     position: relative;
     top: 0;
@@ -49,13 +59,15 @@
     animation-timing-function: ease-out;
     animation-fill-mode: backwards;
   }
-  #main-menu > .menu-wrapper > .top > img:nth-child(1){ animation-delay: .5s }
-  #main-menu > .menu-wrapper > .top > img:nth-child(2){ animation-delay: .4s }
-  #main-menu > .menu-wrapper > .top > img:nth-child(3){ animation-delay: .3s }
-  #main-menu > .menu-wrapper > .top > img:nth-child(4){ animation-delay: .2s }
-  #main-menu > .menu-wrapper > .top > img:nth-child(5){ animation-delay: .1s }
+  #main-menu > .menu-wrapper > .top > .icon:nth-child(1){ animation-delay: .5s }
+  #main-menu > .menu-wrapper > .top > .icon:nth-child(2){ animation-delay: .4s }
+  #main-menu > .menu-wrapper > .top > .icon:nth-child(3){ animation-delay: .3s }
+  #main-menu > .menu-wrapper > .top > .icon:nth-child(4){ animation-delay: .2s }
+  #main-menu > .menu-wrapper > .top > .icon:nth-child(5){ animation-delay: .1s }
 
-  #main-menu > .menu-wrapper > .top > img.active {
+  #main-menu > .menu-wrapper > .top > .icon.active {
+    color: @lightColor;
+    background-color: @accentColor;
     opacity: 1;
   }
 
@@ -81,18 +93,29 @@
     animation-timing-function: ease-out;
     animation-fill-mode: backwards;
   }
-  #main-menu > .menu-wrapper > .submenu > .submenu-item img {
-    width: 2em;
+  #main-menu > .menu-wrapper > .submenu > .submenu-item .icon {
     vertical-align: middle;
+    text-align: center;
     margin: -0.2em 0.4em 0 0.8em;
+    border-radius: 3em;
+    padding: 0.5em;
+    width: 2em;
+
+    color: @lightColor;
+    background-color: @darkColor;
   }
   #main-menu > .menu-wrapper > .submenu > .submenu-item label {
     vertical-align: middle;
   }
 
   #main-menu > .menu-wrapper > .submenu > .submenu-item.active {
-    background-color: #EBA601;
+    background-color: @accentColor;
     opacity: 1;
+
+    .icon {
+      color: @accentColor;
+      background-color: @lightColor;
+    }
   }
 
   @keyframes submenu_slide_in {

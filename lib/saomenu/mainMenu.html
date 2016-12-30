@@ -1,12 +1,12 @@
 <div id="main-menu">
     <div class="menu-wrapper">
         <span class="top">
-            <img ng-repeat="item in items" ng-src="saomenu/images/Ringed%20{{item.icon}}{{isSelected(0, item)?'_on':''}}.svg" ng-class="{ 'active': isSelected(0, item)}" />
+            <i ng-repeat="item in items" class="fa fa-{{item.icon}} icon" ng-class="{ 'active': isSelected(0, item)}"></i>
         </span>
 
         <div class="submenu" ng-repeat="submenu in submenus">
             <div class="submenu-item" ng-repeat="sub in submenu"  ng-class="{ 'active': isSelected($parent.$index+1, sub)}">
-                <img ng-src="saomenu/images/{{sub.icon}}{{isSelected($parent.$index+1, sub)?'_on':''}}.svg" />
+                <i class="fa fa-{{sub.icon}} icon"></i>
                 <label ng-bind="sub.label"></label>
             </div>
         </div>
