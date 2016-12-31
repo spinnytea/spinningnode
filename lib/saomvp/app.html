@@ -1,5 +1,18 @@
 <div id="sao-mvp">
     <div class="player stats">
         <h1 data-ng-bind="player.name"></h1>
+        <div>Health: <span ng-bind="player.health"></span> / <span ng-bind="player.max_health"></span></div>
+
+        <table class="table table-condensed">
+            <thead><tr>
+                <th colspan="4">Skills</th>
+            </tr></thead>
+            <tbody><tr ng-repeat="s in player.skills">
+                <td><span ng-bind="s.name"></span></td>
+                <td><span ng-bind="s.curr"></span> / <span ng-bind="s.next()"></span></td>
+                <td>x<span ng-bind="s.level"></span></td>
+                <td><button class="btn btn-xs btn-default" ng-click="s.add()"><i class="fa fa-plus"></i></button></td>
+            </tr></tbody>
+        </table>
     </div>
 </div>
