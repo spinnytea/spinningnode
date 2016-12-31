@@ -7,6 +7,10 @@
   font-family: sword_art_online, "Trebuchet MS", Verdana, sans-serif;
   padding: 1em 0;
 
+  @lightColor: white;
+  @darkColor: grey;
+  @accentColor: #EBA601;
+
   .table {
     margin: 0;
   }
@@ -18,9 +22,17 @@
     border: 1px solid lightgrey;
     box-shadow: 2px 2px 2px lightgrey;
 
+    .maxed {
+      color: @accentColor;
+    }
+
     h1 {
       font-size: 1.5em;
-      margin-top: 0;
+      margin: 0;
+    }
+    h2 {
+      font-size: 1.25em;
+      margin: 0.75em 0 0.25em 0;
     }
   }
 }
