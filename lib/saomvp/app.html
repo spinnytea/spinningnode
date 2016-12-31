@@ -7,7 +7,7 @@
 
         <h2>Skills</h2>
         <table class="table table-condensed">
-            <tbody><tr ng-repeat="s in player.skills | filter: filterSkills" title="{{s.description}}">
+            <tbody><tr ng-repeat="(key, s) in player.skills" ng-if="filterSkills(s)" title="{{s.description}}">
                 <td><span ng-bind="s.name"></span></td>
                 <td ng-if="!s.maxed()"><span ng-bind="s.curr"></span> / <span ng-bind="s.next()"></span></td>
                 <td ng-if="s.maxed()">---</td>
@@ -15,5 +15,11 @@
                 <td><button class="btn btn-xs btn-default" ng-click="s.add()"><i class="fa fa-plus"></i></button></td>
             </tr></tbody>
         </table>
+
+        <h2>All Time Skill Max</h2>
+        <div class="max-skill-block" ng-repeat="(name, level) in player.max_skills">
+            <span class="name" ng-bind="name"></span>
+            <span class="level" ng-bind="level"></span>
+        </div>
     </div>
 </div>
