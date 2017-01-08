@@ -22,8 +22,11 @@ module.exports.config(['$routeProvider', function($routeProvider) {
     controller: 'spinningnode.mazes.appController',
     templateUrl: 'maze/app.html'
   }).when('/4d_maze', {
-    controller: 'spinningnode.4d_maze.main.controller',
+    controller: 'spinningnode.four_d_maze.main.controller',
     templateUrl: '4d_maze/app.html'
+  }).when('/4d_maze/demo', {
+    controller: 'spinningnode.four_d_maze.demo.controller',
+    templateUrl: '4d_maze/demo.html'
   }).when('/neural', {
     controller: 'spinningnode.neural.app.controller',
     templateUrl: 'neural/app.html'
