@@ -120,6 +120,30 @@ describe.only('4d_maze', function() {
           expect(m.rooms[0][0][0][0].d.length).to.equal(4);
         });
       }); // end constructor
+
+      describe('door', function() {
+        it('basic', function() {
+          var m = new map.Map(2);
+          expect(m.rooms[0].d[0]).to.deep.equal({ b: false, f: false });
+          expect(m.rooms[1].d[0]).to.deep.equal({ b: false, f: false });
+
+          m.door([0], 0, true);
+
+          expect(m.rooms[0].d[0]).to.deep.equal({ b: false, f: true });
+          expect(m.rooms[1].d[0]).to.deep.equal({ b: true, f: false });
+        });
+
+        it('complicated', function() {
+          var m = new map.Map(5, 5, 5, 5);
+          expect(m.rooms[0][1][2][3].d[2]).to.deep.equal({ b: false, f: false });
+          expect(m.rooms[0][1][2][3].d[2]).to.deep.equal({ b: false, f: false });
+
+          m.door([0, 1, 3, 3], 2, false);
+
+          expect(m.rooms[0][1][2][3].d[2]).to.deep.equal({ b: false, f: true });
+          expect(m.rooms[0][1][3][3].d[2]).to.deep.equal({ b: true, f: false });
+        });
+      }); // end door
     }); // end Map
   }); // end map
 }); // end 4d_maze
