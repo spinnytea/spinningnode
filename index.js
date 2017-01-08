@@ -2,6 +2,7 @@
 var _ = require('lodash');
 module.exports = angular.module('spinningnode', [
   require('./lib/maze').name,
+  require('./lib/4d_maze').name,
   require('./lib/neural').name,
   require('./lib/utils/datadiffModule').name,
   require('./lib/battlesudoku').name,
@@ -20,6 +21,9 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/mazes', {
     controller: 'spinningnode.mazes.appController',
     templateUrl: 'maze/app.html'
+  }).when('/4d_maze', {
+    controller: 'spinningnode.4d_maze.main.controller',
+    templateUrl: '4d_maze/app.html'
   }).when('/neural', {
     controller: 'spinningnode.neural.app.controller',
     templateUrl: 'neural/app.html'
