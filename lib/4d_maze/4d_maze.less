@@ -1,5 +1,5 @@
 #four-d-maze {
-  .maze {
+  .maze.matrix {
     border: 2px solid lightgrey;
     display: inline-block;
     padding: 1em;
@@ -31,6 +31,30 @@
         border-top: 1px dashed lightgrey;
       }
       .d1f {
+        border-bottom: 1px dashed lightgrey;
+      }
+    }
+
+    .d2 {
+      display: inline-block;
+      margin: 0 0.5em;
+
+      .d2b {
+        border-left: 1px dashed lightgrey;
+      }
+      .d2f {
+        border-right: 1px dashed lightgrey;
+      }
+    }
+
+    .d3 {
+      display: block;
+      margin: 1em 0;
+
+      .d3b {
+        border-top: 1px dashed lightgrey;
+      }
+      .d3f {
         border-bottom: 1px dashed lightgrey;
       }
     }
