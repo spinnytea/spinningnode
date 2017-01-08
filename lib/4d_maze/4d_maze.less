@@ -1,10 +1,20 @@
 #four-d-maze {
-  .maze.matrix {
+  .maze {
     border: 2px solid lightgrey;
     display: inline-block;
     padding: 1em;
 
+    .room {
+      display: inline-block;
+      height: 1em;
+      width: 1em;
+      border: 1px solid black;
+    }
+
     .d0 {
+      display: inline-block;
+      margin: 0 0.5em;
+
       .d0b {
         border-left: 1px dashed lightgrey;
       }
@@ -13,11 +23,16 @@
       }
     }
 
-    .room {
-      display: inline-block;
-      height: 1em;
-      width: 1em;
-      border: 1px solid black;
+    .d1 {
+      display: block;
+      margin: 1em 0;
+
+      .d1b {
+        border-top: 1px dashed lightgrey;
+      }
+      .d1f {
+        border-bottom: 1px dashed lightgrey;
+      }
     }
   }
 }

@@ -1,7 +1,27 @@
 <div id="four-d-maze">
-    <div class="maze matrix">
-        <div class="d0">
-            <div ng-repeat="r in one.rooms" class="room" connections="r"></div>
-        </div>
-    </div>
+    <section>
+        <header><h1>Matrix render</h1></header>
+
+        <section>
+            <header><h2>1D maze</h2></header>
+
+            <div class="maze matrix-one">
+                <div class="d0" ng-repeat="room in one.rooms">
+                    <div class="room" connections="room"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <header><h2>2D maze</h2></header>
+
+            <div class="maze matrix-two">
+                <div class="d0" ng-repeat="one in two.rooms">
+                    <div class="d1" ng-repeat="room in one">
+                        <div class="room" connections="room"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
 </div>
