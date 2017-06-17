@@ -1,14 +1,19 @@
+@import "hexagon.css";
+
 #four-d-maze {
   .maze.matrix {
     border: 2px solid lightgrey;
     display: inline-block;
     padding: 1em;
 
-    .room {
+    .room:not(.hexagon) {
       display: inline-block;
       height: 1em;
       width: 1em;
       border: 1px solid black;
+    }
+    .hexagon {
+      background-color: white;
     }
 
     .d0 {
