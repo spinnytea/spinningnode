@@ -10,6 +10,7 @@ module.exports = angular.module('spinningnode', [
   require('./lib/saomvp').name,
   require('./lib/asym_proto').name,
   require('./lib/event_tracker').name,
+  require('./lib/frow').name,
   'templates',
   'drahak.hotkeys',
   'LocalStorageModule',
@@ -57,6 +58,9 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/asym_proto/player', {
     controller: 'spinningnode.asym_proto.player.controller',
     templateUrl: 'asym_proto/player.html'
+  }).when('/frow', {
+    controller: 'spinningnode.frow.app.controller',
+    templateUrl: 'frow/app.html'
   }).otherwise({
     templateUrl: 'oops.html'
   });
