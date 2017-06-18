@@ -61,6 +61,8 @@ module.exports.config(['$routeProvider', function($routeProvider) {
   }).when('/frow', {
     controller: 'spinningnode.frow.app.controller',
     templateUrl: 'frow/app.html'
+  }).when('/frow/docs', {
+    templateUrl: 'frow/docs.html'
   }).otherwise({
     templateUrl: 'oops.html'
   });
