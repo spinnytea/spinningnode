@@ -1,8 +1,19 @@
 #FrowPB {
-  @unitSize: 10px;
+  @line-size: 0.1;
 
   .map {
     border: 1px solid grey;
-    border-radius: @unitSize;
+    border-radius: 10px;
+    width: 960px;
+    height: 540px;
   }
+
+  .resource {
+    fill: none;
+    stroke: black;
+    stroke-width: @line-size;
+    r: 0.5 - @line-size/2;
+  }
+  .resource.Starch { fill: #cc3; }
+  .resource.Plastic { fill: #ee2; }
 }

@@ -1,3 +1,5 @@
-<svg class="map">
-
+<svg class="map" viewbox="0.5 0.5 48 27">
+    <pb-resource ng-repeat="(ignore, r) in resources"
+                 ng-if="r && r.location.how==='map'"
+                 resource="r"></pb-resource>
 </svg>
